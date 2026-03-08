@@ -1,0 +1,15 @@
+[project]
+name = "perovskites-modeling-with-rag"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "aiohttp>=3.13.3",
+    "gradio>=6.4.0",
+    "langchain>=1.2.7",
+    "langchain-text-splitters>=1.1.0",
+    "pydantic>=2.12.5",
+    "pypdf>=6.7.5",
+    "qdrant-client>=1.16.2",
+]

@@ -1,2 +1,2 @@
-from .interface import DocumentStore, DBSchema
+from .interface import DocumentStore, DocumentMustBeDeletedFilter, DBSchema
 import src.document_store.creator

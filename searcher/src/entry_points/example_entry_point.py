@@ -1,6 +1,5 @@
 from .interface import EntryPoint
 from src.common.workers_pool import WorkersPool
-from src.common.utils import parse_config, setup_logger
 
 from src.document_chunker import DocumentChunker
 from src.document_parser import DocumentParser
@@ -17,15 +16,12 @@ logger = logging.getLogger(__name__)
 
 class ExampleEntryPoint(EntryPoint):
     def __init__(self, args: Namespace):
-        super().__init__()
-        self._config = parse_config(args.config)
+        super().__init__(args)
         self._file_to_chunk = args.file_to_chunk
-        setup_logger(self._config.get("logging"))
 
     @classmethod
     def add_subparser(cls, parser: ArgumentParser) -> None:
-        parser.add_argument("config", type=Path)
-        parser.add_argument("-f", "--file_to_chunk", type=Path, required=True)
+        parser.add_argument("file_to_chunk", type=Path)
 
     async def run(self) -> None:
         n_of_workers = self._config.get("common", {}).get("n_of_workers")

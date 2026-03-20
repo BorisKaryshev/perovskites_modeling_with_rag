@@ -1,10 +1,36 @@
-from abc import ABC, abstractmethod
-from typing import Dict, List
-
 from src.common.class_with_creator import ClassWithCreator
+
+from abc import ABC, abstractmethod
+from dataclasses import dataclass
+from typing import AsyncGenerator, Dict, List
+from enum import Enum, auto
+
+
+class ChatStreamResponseType(Enum):
+    THINKING = auto()
+    CONTENT = auto()
+
+
+@dataclass
+class ChatStreamResponse:
+    data: str
+    content_type: ChatStreamResponseType
 
 
 class ChatProvider(ABC, ClassWithCreator):
+    def __init__(self):
+        self._json_schema = None
+
+    @abstractmethod
+    async def stream(
+        self,
+        messages: List[Dict[str, str]],
+    ) -> AsyncGenerator[ChatStreamResponse, None]:
+        pass
+
+    def set_output_json_schema(self, schema):
+        self._json_schema = schema
+
     @abstractmethod
     async def chat_response_only(self, messages: List[Dict[str, str]]) -> str:
         pass

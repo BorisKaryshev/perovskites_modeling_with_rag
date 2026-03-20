@@ -57,7 +57,11 @@ class DocumentStore(ABC, ClassWithCreator, WorkersPool):
         pass
 
     @abstractmethod
-    async def search_by_query(self, query: str) -> List[Tuple[float, DBSchema]]:
+    async def search_by_query(
+        self,
+        query: str,
+        limit: Optional[int] = None,
+    ) -> List[Tuple[float, DBSchema]]:
         pass
 
     @abstractmethod

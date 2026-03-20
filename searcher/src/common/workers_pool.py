@@ -19,6 +19,7 @@ class WorkersPool:
 
     @staticmethod
     async def create_pool(n_of_workers: int = DEFAULT_N_OF_WORKERS):
+        logger.info(f"Creating worker pool with {n_of_workers = }")
         async with WorkersPool._pool_lock:
             if WorkersPool._pool is None:
                 WorkersPool._pool = ProcessPoolExecutor(n_of_workers)

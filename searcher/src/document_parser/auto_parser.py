@@ -20,6 +20,7 @@ class AutoParser(DocumentParser):
         }
 
     async def parse_document(self, document_path: Path) -> str:
+        logger.info(f"Running document parsing for: {document_path}")
         doc_type = await self.get_doc_type(document_path)
         parser = self.__sub_parsers.get(doc_type)
 

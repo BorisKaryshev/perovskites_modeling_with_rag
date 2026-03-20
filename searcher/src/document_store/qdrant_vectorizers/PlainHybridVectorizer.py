@@ -1,4 +1,4 @@
-from .QDrantDBStore import QDrantVectoriser
+from .interface import QDrantVectoriser
 from src.llm_providers import EmbedderProvider
 
 from qdrant_client import models
@@ -8,7 +8,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class PlainQdrantVectorizer(QDrantVectoriser):
+class PlainHybridQdrantVectorizer(QDrantVectoriser):
     def __init__(self, provider_type: str, base_url: str, model: str, *_, **kwargs):
         super().__init__()
         logger.debug(f"Creating embedder with opts: {kwargs}")
@@ -23,12 +23,30 @@ class PlainQdrantVectorizer(QDrantVectoriser):
 
     async def vectorize_for_upsert(self, data: str) -> dict:
         logger.debug("Calling vectorize_for_upsert")
-        return {"dense": await self._client.embed(data)}
+        return {
+            "dense": await self._client.embed(data),
+            "bm25": models.Document(
+                text=data,
+                model="Qdrant/bm25",
+            ),
+        }
 
     async def vectorize_for_search(self, data: str) -> dict:
         return {
-            "using": "dense",
-            "query": await self._client.embed(data),
+            "prefetch": [
+                models.Prefetch(
+                    query=models.Document(
+                        text=data,
+                        model="Qdrant/bm25",
+                    ),
+                    using="bm25",
+                ),
+                models.Prefetch(
+                    query=(await self._client.embed(data)),
+                    using="dense",
+                ),
+            ],
+            "query": models.FusionQuery(fusion=models.Fusion.RRF),
         }
 
     async def create_collection_config(self) -> dict:
@@ -41,5 +59,10 @@ class PlainQdrantVectorizer(QDrantVectoriser):
                     distance=models.Distance.COSINE,
                     size=self._embedding_size,
                 )
-            }
+            },
+            "sparse_vectors_config": {
+                "bm25": models.SparseVectorParams(
+                    modifier=models.Modifier.IDF,
+                )
+            },
         }

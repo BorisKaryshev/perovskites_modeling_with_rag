@@ -1,7 +1,6 @@
 from src.common.instance_type_enum import InstanceTypeEnum
 from .interface import DocumentStore
-from .QDrantDBStore import QDrantDBStore, QDrantVectoriser
-from .PlainQdrantVectorizer import PlainQdrantVectorizer
+from .QDrantDBStore import QDrantDBStore
 
 
 class DocumentStoreInstances(InstanceTypeEnum):
@@ -19,20 +18,3 @@ def create_document_store(
 
 
 DocumentStore._set_creator(create_document_store)
-
-
-class QDrantVectorizerInstances(InstanceTypeEnum):
-    PLAIN = ("plain", PlainQdrantVectorizer)
-
-
-def create_qdrant_vectorizer(
-    name: str,
-    *args,
-    **kwargs,
-) -> QDrantVectoriser:
-    instance_type = QDrantVectorizerInstances(name)
-    result = instance_type.instance_type(*args, **kwargs)
-    return result
-
-
-QDrantVectoriser._set_creator(create_qdrant_vectorizer)

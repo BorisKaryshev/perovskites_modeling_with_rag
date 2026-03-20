@@ -1,9 +1,7 @@
-from src.common.class_with_creator import ClassWithCreator
 from .interface import DBSchema, DocumentMustBeDeletedFilter, DocumentStore
 
 import asyncio
-from typing import List, Tuple
-from abc import ABC, abstractmethod
+from typing import List, Tuple, Optional
 from itertools import batched
 import logging
 
@@ -12,28 +10,7 @@ from qdrant_client.models import PointStruct
 
 logger = logging.getLogger(__name__)
 
-
-class QDrantVectoriser(ABC, ClassWithCreator):
-
-    @abstractmethod
-    async def vectorize_for_upsert(self, data: str) -> dict:
-        pass
-
-    @abstractmethod
-    async def vectorize_for_search(self, data: str) -> dict:
-        pass
-
-    @abstractmethod
-    async def create_collection_config(self) -> dict:
-        pass
-
-    @staticmethod
-    def create(
-        instance_name: str,
-        *args,
-        **kwargs,
-    ) -> "QDrantVectoriser":
-        return QDrantVectoriser._create(instance_name, *args, **kwargs)
+from .qdrant_vectorizers import QDrantVectoriser
 
 
 class QDrantDBStore(DocumentStore):
@@ -41,7 +18,7 @@ class QDrantDBStore(DocumentStore):
         self,
         collection_name: str,
         vectorizer: dict,
-        n_of_pointis_limit: int = 10,
+        limit: int = 10,
         force_recreate_collection: bool = False,
         **kwargs,
     ):
@@ -49,7 +26,7 @@ class QDrantDBStore(DocumentStore):
 
         self._client = AsyncQdrantClient(**kwargs)
         self._collection_name = collection_name
-        self._n_of_pointis_limit = n_of_pointis_limit
+        self._n_of_pointis_limit = limit
         self._force_recreate_collection = force_recreate_collection
         vectorizer_type = vectorizer.pop("vectorizer_type")
         self._vectorizer = QDrantVectoriser.create(
@@ -96,20 +73,27 @@ class QDrantDBStore(DocumentStore):
             ],
         )
 
-    async def search_by_query(self, query: str) -> List[Tuple[float, DBSchema]]:
+    async def search_by_query(
+        self,
+        query: str,
+        limit: Optional[int] = None,
+    ) -> List[Tuple[float, DBSchema]]:
         await self.try_create_collection()
+
+        limit = limit or self._n_of_pointis_limit
 
         logger.info(f"Searching by query: '{query}'")
         search_vectors = await self._vectorizer.vectorize_for_search(query)
 
         response = await self._client.query_points(
             collection_name=self._collection_name,
-            limit=self._n_of_pointis_limit,
+            limit=limit,
             **search_vectors,
         )
         response = response.points
 
         result = [(i.score, DBSchema.model_validate(i.payload)) for i in response]
+        logger.info(f"Got {len(result)} results")
         return result
 
     async def delete_document(self, delete_filter: DocumentMustBeDeletedFilter):

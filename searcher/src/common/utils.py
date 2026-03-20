@@ -1,9 +1,12 @@
 import logging
 import logging.config
+from os import environ
 from pathlib import Path
 from typing import Optional
 import configparser as cfp
+
 from typing import Callable, Any, Iterable
+from dotenv import load_dotenv
 
 DEFAULT_LOGGER_CONFIG = {
     "version": 1,
@@ -14,16 +17,16 @@ DEFAULT_LOGGER_CONFIG = {
     },
     "handlers": {
         "default": {
-            "level": "DEBUG",
+            "level": "INFO",
             "formatter": "standard",
             "class": "logging.StreamHandler",
-            "stream": "ext://sys.stdout",
+            "stream": "ext://sys.stderr",
         }
     },
     "loggers": {
         "": {
             "handlers": ["default"],
-            "level": "INFO",
+            "level": "DEBUG",
             "propagate": True,
         },
         "httpx": {
@@ -104,10 +107,15 @@ def auto_cast(value: Any, casters: Optional[Iterable[Callable[[str], Any]]] = No
 
 
 def parse_config(path: Path) -> dict:
+    load_dotenv()
+
     if not path.exists():
         raise RuntimeError(f"Config not found in path: {path}")
 
-    parser = cfp.ConfigParser(allow_no_value=True)
+    parser = cfp.ConfigParser(
+        allow_no_value=True,
+        interpolation=cfp.ExtendedInterpolation(),
+    )
     with path.open("r") as f:
         parser.read_file(f)
 

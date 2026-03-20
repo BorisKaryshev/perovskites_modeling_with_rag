@@ -6,11 +6,6 @@ import os
 from abc import ABC, abstractmethod
 from datetime import datetime
 from pathlib import Path
-from enum import Enum
-
-
-class DocumentParserInstances(Enum):
-    UNKNOWN = None
 
 
 class DocumentParser(ABC, ClassWithCreator, WorkersPool):

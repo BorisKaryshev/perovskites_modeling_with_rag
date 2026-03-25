@@ -112,6 +112,7 @@ class EvalEntryPoint(EntryPoint):
 
         result = {
             "query": row["query"],
+            "response": response.response,
             **{i.metric_name: i.verdict.value for i in scores},
         }
         return result

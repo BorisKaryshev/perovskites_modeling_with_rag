@@ -1,6 +1,6 @@
 import logging
 import logging.config
-from os import environ
+import os
 from pathlib import Path
 from typing import Optional
 import configparser as cfp
@@ -39,6 +39,17 @@ DEFAULT_LOGGER_CONFIG = {
 
 
 LOGGER_CONFIG = None
+
+
+# Define the custom interpolation class
+class ExtendedEnvInterpolation(cfp.ExtendedInterpolation):
+    """Interpolation which expands environment variables in values."""
+
+    def before_get(self, parser, section, option, value, defaults):
+        # Expand environment variables using standard shell-style syntax ($VAR or ${VAR})
+        expanded_value = os.path.expandvars(value)
+        # Call the superclass method to perform standard ExtendedInterpolation
+        return super().before_get(parser, section, option, expanded_value, defaults)
 
 
 def setup_default_logger():
@@ -114,7 +125,7 @@ def parse_config(path: Path) -> dict:
 
     parser = cfp.ConfigParser(
         allow_no_value=True,
-        interpolation=cfp.ExtendedInterpolation(),
+        interpolation=ExtendedEnvInterpolation(),
     )
     with path.open("r") as f:
         parser.read_file(f)

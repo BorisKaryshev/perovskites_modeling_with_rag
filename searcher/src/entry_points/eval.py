@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 
 DEFAULT_REPORTS_PATH = (
     Path(__file__).parent.parent.parent
-    / Path("reports")
+    / Path("experimental_reports")
     / Path(datetime.now().strftime("%Y_%m_%d-%H_%M_%s"))
 )
 

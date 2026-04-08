@@ -2,6 +2,7 @@ from .interface import (
     ChatProvider,
     ChatStreamResponse,
     ChatStreamResponseType,
+    ChatVerboseResponse,
     EmbedderProvider,
 )
 
@@ -10,19 +11,44 @@ import json
 from typing import AsyncGenerator, Dict, List
 import logging
 
+import backoff
+
 logger = logging.getLogger(__name__)
+backoff_logger = logging.getLogger(__name__ + ".backoff")
+
+RETRY_DECO_FACTORY = lambda: backoff.on_exception(
+    backoff.expo,
+    (
+        ConnectionError,
+        TimeoutError,
+    ),
+    max_tries=5,
+    jitter=backoff.random_jitter,
+    logger=backoff_logger,
+)
 
 
 class OpenAIChatProvider(ChatProvider):
     def __init__(
-        self, model: str, base_url: str, api_key: str, temperature: float = 0.8, **_
+        self,
+        model: str,
+        base_url: str,
+        api_key: str,
+        temperature: float = 0.8,
+        max_completion_tokens: int = 4096,
+        request_timeout: float = 90.0,
+        **_,
     ):
         super().__init__()
         self._model = model
         self._base_url = base_url
         self._api_key = api_key
         self._temperature = temperature
+        self._max_compeletion_tokens = max_completion_tokens
 
+        self._request_timeout = request_timeout
+
+    @RETRY_DECO_FACTORY()
     async def stream(
         self,
         messages: List[Dict[str, str]],
@@ -36,12 +62,14 @@ class OpenAIChatProvider(ChatProvider):
             "messages": messages,
             "stream": True,
             "temperature": self._temperature,
+            "max_completion_tokens": self._max_compeletion_tokens,
         }
         if self._json_schema:
             payload["type"] = "json_schema"
             payload["schema"] = self._json_schema
 
-        async with aiohttp.ClientSession(headers=headers) as session:
+        timeout = aiohttp.ClientTimeout(total=self._request_timeout)
+        async with aiohttp.ClientSession(headers=headers, timeout=timeout) as session:
             async with session.post(
                 f"{self._base_url}/v1/chat/completions",
                 json=payload,
@@ -83,15 +111,10 @@ class OpenAIChatProvider(ChatProvider):
                     )
 
     async def chat_response_only(self, messages: List[Dict[str, str]]) -> str:
-        output = ""
-        async for i in self.stream(messages):
-            if i.content_type == ChatStreamResponseType.CONTENT:
-                output += i.data
-        return output
+        return (await self.chat(messages)).response
 
-        return (await self.chat(messages)).get("message", {}).get("content", "")
-
-    async def chat(self, messages: List[Dict[str, str]]) -> dict:
+    @RETRY_DECO_FACTORY()
+    async def chat(self, messages: List[Dict[str, str]]) -> ChatVerboseResponse:
         headers = {
             "Authorization": f"Bearer {self._api_key}",
             "Content-Type": "application/json",
@@ -105,7 +128,8 @@ class OpenAIChatProvider(ChatProvider):
             payload["type"] = "json_schema"
             payload["json_schema"] = self._json_schema
 
-        async with aiohttp.ClientSession(headers=headers) as session:
+        timeout = aiohttp.ClientTimeout(total=self._request_timeout)
+        async with aiohttp.ClientSession(headers=headers, timeout=timeout) as session:
             async with session.post(
                 f"{self._base_url}/v1/chat/completions",
                 json=payload,
@@ -116,7 +140,14 @@ class OpenAIChatProvider(ChatProvider):
                     )
                 output = await response.json()
                 logger.info(f"Got response from llm: {output}")
-                return output
+
+                return ChatVerboseResponse(
+                    response=output["choices"][0]["message"]["content"],
+                    prompt_tokens=output["usage"]["prompt_tokens"],
+                    completion_tokens=output["usage"]["completion_tokens"],
+                    total_tokens=output["usage"]["total_tokens"],
+                    thinking="",
+                )
 
 
 class OpenAIEmbedderProvider(EmbedderProvider):
@@ -126,7 +157,9 @@ class OpenAIEmbedderProvider(EmbedderProvider):
         self._base_url = base_url
         self._api_key = api_key
 
+    @RETRY_DECO_FACTORY()
     async def embed(self, query: str) -> List[float]:
+        logger.info(f"Called embed with {query = }")
         headers = {
             "Authorization": f"Bearer {self._api_key}",
             "Content-Type": "application/json",

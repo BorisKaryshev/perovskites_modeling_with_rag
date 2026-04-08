@@ -12,6 +12,15 @@ class ChatStreamResponseType(Enum):
 
 
 @dataclass
+class ChatVerboseResponse:
+    response: str
+    prompt_tokens: int
+    completion_tokens: int
+    total_tokens: int
+    thinking: str = ""
+
+
+@dataclass
 class ChatStreamResponse:
     data: str
     content_type: ChatStreamResponseType
@@ -36,7 +45,7 @@ class ChatProvider(ABC, ClassWithCreator):
         pass
 
     @abstractmethod
-    async def chat(self, messages: List[Dict[str, str]]) -> dict:
+    async def chat(self, messages: List[Dict[str, str]]) -> ChatVerboseResponse:
         pass
 
     @staticmethod

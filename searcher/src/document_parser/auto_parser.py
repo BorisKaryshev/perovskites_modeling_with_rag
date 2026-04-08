@@ -17,6 +17,7 @@ class AutoParser(DocumentParser):
         self.__sub_parsers = {
             DocumentType.MARKDOWN: MarkdownParser(),
             DocumentType.PDF: PdfParser(),
+            DocumentType.TEXT: MarkdownParser(),
         }
 
     async def parse_document(self, document_path: Path) -> str:

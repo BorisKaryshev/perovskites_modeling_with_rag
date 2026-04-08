@@ -8,6 +8,7 @@ class DocumentParserInstances(InstanceTypeEnum):
     DEFAULT = ("default", MarkdownParser)
     AUTO = ("auto", AutoParser)
     MARKDOWN = ("markdown", MarkdownParser)
+    TEXT = ("text", MarkdownParser)
 
 
 def create(

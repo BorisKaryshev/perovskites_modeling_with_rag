@@ -5,3 +5,4 @@ class DocumentType(str, Enum):
     UNKNONW = ""
     PDF = "pdf"
     MARKDOWN = "md"
+    TEXT = "txt"

@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import List, Optional
+from typing import List, Union, Optional
 from dataclasses import dataclass
 
 from pydantic import BaseModel
@@ -8,8 +8,9 @@ from pydantic import BaseModel
 @dataclass
 class Metric:
     name: str
-    available_values: List[str]
+    available_values: List[Union[str, int, bool]]
     prompt: str
+    is_boolean: bool = False
 
     _response_type: Optional[type] = None
     _format_prompt: Optional[str] = None
@@ -27,13 +28,21 @@ class Metric:
 
         ValidVerdict = Enum(
             "ValidVerdict",
-            ((i, i) for i in self.available_values),
+            ((str(i), i) for i in self.available_values),
             type=str,
         )
 
         class ModelResponse(BaseModel):
+            is_boolean: bool = self.is_boolean
+
             metric_name: str = self.name
             verdict: ValidVerdict
+
+            @property
+            def parsed_verdict(self):
+                if self.is_boolean:
+                    return str(self.verdict.value).lower() in ("1", "true")
+                return self.verdict.value
 
         self._response_type = ModelResponse
         return self._response_type

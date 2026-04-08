@@ -1,16 +1,13 @@
 from .interface import ChatProvider, EmbedderProvider
-from .ollama import OllamaChatProvider, OllamaEmbedderProvider
 from .open_ai import OpenAIChatProvider, OpenAIEmbedderProvider
 from src.common.instance_type_enum import InstanceTypeEnum
 
 
 class ChatProviderInstances(InstanceTypeEnum):
-    OLLAMA = ("ollama", OllamaChatProvider)
     OPEN_AI = ("open_ai", OpenAIChatProvider)
 
 
 class EmbedderProviderInstances(InstanceTypeEnum):
-    OLLAMA = ("ollama", OllamaEmbedderProvider)
     OPEN_AI = ("open_ai", OpenAIEmbedderProvider)
 
 

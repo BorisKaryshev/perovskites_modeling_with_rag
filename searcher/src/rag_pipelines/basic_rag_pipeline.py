@@ -1,9 +1,8 @@
-from .interface import RagResponse, RagPipeline
+from .interface import RagResponse, RagPipeline, VerboseRagResponse
 
 from src.document_chunker import DocumentChunker
 from src.document_parser import DocumentParser
 from src.document_store import DocumentStore, DBSchema
-from src.llm_providers import ChatStreamResponseType
 from src.entry_points.remove_file import DeleteFileFilter
 from src.chat_requester import ChatRequester
 
@@ -101,17 +100,45 @@ class BasicRagPipeline(RagPipeline):
 
         for _ in range(3):
 
-            response = ""
-            async for i in self._chat_requester.send_request(
+            response = await self._chat_requester.send_request(
                 query,
                 await self._store.search_by_query(query),
                 history,
-            ):
-                if i.content_type != ChatStreamResponseType.CONTENT:
-                    continue
-                response += i.data
+            )
             try:
                 return RagResponse.model_validate_json(response)
+            except Exception as ex:
+                logger.warning(f"Failed to parse answer: {ex}")
+                logger.warning(f"Got response: {response}")
+                raise ex
+
+    async def search_verbose(
+        self,
+        query: str,
+        history: List[Dict[str, str]],
+    ) -> VerboseRagResponse:
+        history = deepcopy(history)
+
+        result = VerboseRagResponse()
+
+        for _ in range(3):
+            result.generation_attempts += 1
+            retrieved_docs = await self._store.search_by_query(query)
+            result.chunks_retrieved = retrieved_docs
+
+            verbose_response = await self._chat_requester.send_request_verbose(
+                query,
+                retrieved_docs,
+                history,
+            )
+
+            result.prompt_tokens += verbose_response.prompt_tokens
+            result.completion_tokens += verbose_response.completion_tokens
+            result.total_tokens += verbose_response.total_tokens
+            try:
+                response = verbose_response.response
+                result.rag_response = RagResponse.model_validate_json(response)
+                return result
             except Exception as ex:
                 logger.warning(f"Failed to parse answer: {ex}")
                 logger.warning(f"Got response: {response}")

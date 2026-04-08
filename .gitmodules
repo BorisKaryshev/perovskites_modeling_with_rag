@@ -1,0 +1,3 @@
+[submodule "searcher/docs/eval_datasets/ru_rag_test_dataset"]
+	path = searcher/docs/eval_datasets/ru_rag_test_dataset
+	url = github:slivka83/ru_rag_test_dataset.git

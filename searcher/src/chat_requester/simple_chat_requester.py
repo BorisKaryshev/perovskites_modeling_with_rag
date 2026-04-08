@@ -1,6 +1,6 @@
 from .interface import ChatRequester
 from src.document_store import DBSchema
-from src.llm_providers import ChatProvider, ChatStreamResponse
+from src.llm_providers import ChatProvider, ChatStreamResponse, ChatVerboseResponse
 from src.rag_pipelines.interface import RagResponse
 
 from typing import AsyncGenerator, Dict, List, Optional, Tuple
@@ -70,12 +70,12 @@ class SimpleChatRequester(ChatRequester):
         else:
             self._prompt = DEFAULT_PROMPT
 
-    async def send_request(
+    async def _prepare_request(
         self,
         query: str,
         records_with_scores: List[Tuple[float, DBSchema]],
         history: List[Dict[str, str]],
-    ) -> AsyncGenerator[ChatStreamResponse, None]:
+    ):
         await self.lazy_load()
 
         if self._prompt is None:
@@ -100,5 +100,32 @@ class SimpleChatRequester(ChatRequester):
             {"role": "system", "content": prompt},
         ]
 
+    async def send_request_stream(
+        self,
+        query: str,
+        records_with_scores: List[Tuple[float, DBSchema]],
+        history: List[Dict[str, str]],
+    ) -> AsyncGenerator[ChatStreamResponse, None]:
+        await self._prepare_request(query, records_with_scores, history)
+
         async for i in self._chat_provider.stream(history):
             yield i
+
+    async def send_request(
+        self,
+        query: str,
+        records_with_scores: List[Tuple[float, DBSchema]],
+        history: List[Dict[str, str]],
+    ) -> str:
+        return (
+            await self.send_request_verbose(query, records_with_scores, history)
+        ).response
+
+    async def send_request_verbose(
+        self,
+        query: str,
+        records_with_scores: List[Tuple[float, DBSchema]],
+        history: List[Dict[str, str]],
+    ) -> ChatVerboseResponse:
+        await self._prepare_request(query, records_with_scores, history)
+        return await self._chat_provider.chat(history)

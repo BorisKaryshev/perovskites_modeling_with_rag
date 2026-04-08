@@ -3,5 +3,6 @@ from .interface import (
     EmbedderProvider,
     ChatStreamResponse,
     ChatStreamResponseType,
+    ChatVerboseResponse,
 )
 import src.llm_providers.creator

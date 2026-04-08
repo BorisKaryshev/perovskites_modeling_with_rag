@@ -2,6 +2,7 @@ from src.common.class_with_creator import ClassWithCreator
 from src.common.workers_pool import WorkersPool
 from src.document_store import DBSchema
 
+from dataclasses import dataclass, field
 from abc import ABC, abstractmethod
 from typing import Dict, List, Tuple, Optional
 from pathlib import Path
@@ -31,6 +32,16 @@ class RagResponse(BaseModel):
         ]
 
 
+@dataclass
+class VerboseRagResponse:
+    rag_response: Optional[RagResponse] = None
+    chunks_retrieved: List[Tuple[float, DBSchema]] = field(default_factory=list)
+    prompt_tokens: int = 0
+    completion_tokens: int = 0
+    total_tokens: int = 0
+    generation_attempts: int = 0
+
+
 class RagPipeline(ABC, ClassWithCreator, WorkersPool):
     @abstractmethod
     async def add_documents(
@@ -58,6 +69,14 @@ class RagPipeline(ABC, ClassWithCreator, WorkersPool):
         query: str,
         history: List[Dict[str, str]],
     ) -> RagResponse:
+        pass
+
+    @abstractmethod
+    async def search_verbose(
+        self,
+        query: str,
+        history: List[Dict[str, str]],
+    ) -> VerboseRagResponse:
         pass
 
     @abstractmethod

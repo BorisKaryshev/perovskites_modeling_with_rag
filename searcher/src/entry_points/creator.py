@@ -8,6 +8,9 @@ from .remove_file import RemoveFilesEntryPoint
 from .gradio_interface import GradioEntryPoint
 from .simple_chat_request import SimpleChatRequestEntryPoint
 from .eval import EvalEntryPoint
+from .eval_stats import EvalStatsEntryPoint
+from .test import TestEntryPoint
+from .rag import RagEntryPoint
 
 from argparse import ArgumentParser, Namespace
 
@@ -20,6 +23,9 @@ class EnteryPointInstances(InstanceTypeEnum):
     GRADIO = ("gradio", GradioEntryPoint)
     SIMPLE_CHAT_REQUEST = ("simple_chat_request", SimpleChatRequestEntryPoint)
     EVAL = ("eval", EvalEntryPoint)
+    TEST = ("test", TestEntryPoint)
+    EVAL_STATS_PRINTER = ("eval_stats", EvalStatsEntryPoint)
+    RAG_ENTRY_POINT = ("simple_rag", RagEntryPoint)
 
 
 def parse_arguments() -> Namespace:

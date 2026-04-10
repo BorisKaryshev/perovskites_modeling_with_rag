@@ -281,5 +281,5 @@ class EvalEntryPoint(AddDocumentEntryPoint):
                 print(json.dumps(self._printer.export_stats_as_dict()), file=f)
             except Exception:
                 logger.info(f"Got stats: {self._printer.export_stats_as_dict()}")
-
+        logger.info(f"Evaluation completed. Commiting results.")
         self._commit()

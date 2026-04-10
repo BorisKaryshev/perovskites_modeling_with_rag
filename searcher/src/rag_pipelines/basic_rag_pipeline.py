@@ -69,6 +69,7 @@ class BasicRagPipeline(RagPipeline):
         logger.info(
             f"Uploading file '{file}' in {len(chunked)} chunks took: {int((end - begin) * 1000)} ms"
         )
+        return
 
     async def delete_document(self, path: Path):
         begin = time.time()

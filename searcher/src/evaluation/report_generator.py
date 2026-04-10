@@ -22,6 +22,16 @@ class RawMetric:
     verdict: str
 
 
+def _create_markdown_link(path: Optional[Path], base_path: Optional[Path]) -> str:
+    if not path:
+        return ""
+
+    if not base_path:
+        return str(path)
+
+    return f"[{str(path)}]({str(base_path / path)})"
+
+
 def _format_datetime_with_offset(dt: datetime) -> str:
     """
     Format a timezone-aware datetime object as:
@@ -44,10 +54,12 @@ class ReportGenerator:
         output_path: Optional[Path] = None,
         config_path: Optional[Path] = None,
         knowledge_base_files_paths: List[Path] = [],
+        base_path: Optional[Path] = None,
     ):
         self._knowledge_base_files_paths = deepcopy(knowledge_base_files_paths)
         self._eval_dataset_path = eval_dataset_path
         self._config_path = config_path
+        self._base_path = base_path
 
         if not skip_check and not self.is_valid_for_generation():
             raise RuntimeError("Failed check for report generation")
@@ -64,6 +76,7 @@ class ReportGenerator:
         self._usages = defaultdict(list)
 
         self._retrieval_is_relevant = []
+        self._retieval_max_size = 0
 
     def is_valid_for_generation(self):
         repo = Repo(Path(__file__), search_parent_directories=True)
@@ -106,6 +119,15 @@ class ReportGenerator:
         is_relevant_array = np.zeros(len(is_relevant))
         is_relevant_array[is_relevant] = 1
 
+        if len(is_relevant_array) > self._retieval_max_size:
+            self._retieval_max_size = len(is_relevant_array)
+            for idx in range(len(self._retrieval_is_relevant)):
+                arr = self._retrieval_is_relevant[idx]
+                pad_width = (self._retieval_max_size - len(arr),)
+                self._retrieval_is_relevant[idx] = np.pad(
+                    arr, pad_width, constant_values=0
+                )
+
         self._retrieval_is_relevant.append(is_relevant_array)
 
     def export_stats_as_dict(self) -> dict:
@@ -139,12 +161,17 @@ class ReportGenerator:
             "git_branch": repo.active_branch.name,
             "is_all_files_commited": not repo.is_dirty(untracked_files=True),
             "knowledge_base_files_paths": [
-                str(p) for p in self._knowledge_base_files_paths
+                _create_markdown_link(p, self._base_path)
+                for p in self._knowledge_base_files_paths
             ],
         }
 
-        result["common"]["eval_dataset_path"] = str(self._eval_dataset_path)
-        result["common"]["config_path"] = str(self._config_path)
+        result["common"]["eval_dataset_path"] = _create_markdown_link(
+            self._eval_dataset_path, self._base_path
+        )
+        result["common"]["config_path"] = _create_markdown_link(
+            self._config_path, self._base_path
+        )
         result["common"]["timestamp"] = _format_datetime_with_offset(
             datetime.now().astimezone()
         )

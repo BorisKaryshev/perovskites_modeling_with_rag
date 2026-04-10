@@ -1,13 +1,11 @@
 from .interface import EntryPoint
 from src.common.workers_pool import WorkersPool
 
-from src.document_store import DBSchema
 from src.rag_pipelines import RagPipeline
 
 import asyncio
 from argparse import ArgumentParser, Namespace
 from pathlib import Path
-import time
 import logging
 
 logger = logging.getLogger(__name__)
@@ -42,7 +40,7 @@ class AddDocumentEntryPoint(EntryPoint):
 
         tasks = [self.add_file(p, semathore) for p in self._files_to_add]
 
-        asyncio.gather(*tasks)
+        await asyncio.gather(*tasks)
 
     async def run(self) -> None:
         n_of_workers = self._config.get("common", {}).get("n_of_workers")

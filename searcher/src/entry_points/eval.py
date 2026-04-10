@@ -25,7 +25,7 @@ DEFAULT_REPORTS_PATH = (
 )
 
 FILENAMES = {
-    "report": Path("report.md"),
+    "report": Path("README.md"),
     "report_json": Path("report.json"),
     "results": Path("detailed_resulsts.jsonl"),
 }
@@ -70,6 +70,7 @@ class EvalEntryPoint(AddDocumentEntryPoint):
             eval_dataset_path=self._dataset_file_path,
             output_path=self._output_path / FILENAMES["report"],
             config_path=args.config,
+            base_path=Path("../.."),
         )
 
         self._retrieval_metrics = [
@@ -202,6 +203,8 @@ class EvalEntryPoint(AddDocumentEntryPoint):
 
     async def run(self) -> None:
         await super().run()
+
+        logger.info(f"Coroutime for adding documents finished")
 
         queue = asyncio.Queue(self._n_of_parallel_requests)
         output_queue = asyncio.Queue()

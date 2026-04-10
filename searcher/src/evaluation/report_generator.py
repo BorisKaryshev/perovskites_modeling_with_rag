@@ -49,6 +49,9 @@ class ReportGenerator:
         self._eval_dataset_path = eval_dataset_path
         self._config_path = config_path
 
+        if not skip_check and not self.is_valid_for_generation():
+            raise RuntimeError("Failed check for report generation")
+
         self._output_stream = sys.stderr
         if output_path:
             p = Path(output_path)
@@ -61,9 +64,6 @@ class ReportGenerator:
         self._usages = defaultdict(list)
 
         self._retrieval_is_relevant = []
-
-        if not skip_check and not self.is_valid_for_generation():
-            raise RuntimeError("Failed check for report generation")
 
     def is_valid_for_generation(self):
         repo = Repo(Path(__file__), search_parent_directories=True)

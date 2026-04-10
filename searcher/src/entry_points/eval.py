@@ -202,7 +202,7 @@ class EvalEntryPoint(AddDocumentEntryPoint):
         }
         return result
 
-    def commit(self):
+    def _commit(self):
         repo = git.Repo(__file__, search_parent_directories=True)
 
         repo.index.add(self._output_path)

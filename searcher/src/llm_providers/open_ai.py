@@ -139,7 +139,7 @@ class OpenAIChatProvider(ChatProvider):
                         f"Failed to send request to OpenAI: {await response.json()}"
                     )
                 output = await response.json()
-                logger.info(f"Got response from llm: {output}")
+                logger.debug(f"Got response from llm: {output}")
 
                 return ChatVerboseResponse(
                     response=output["choices"][0]["message"]["content"],
@@ -159,7 +159,7 @@ class OpenAIEmbedderProvider(EmbedderProvider):
 
     @RETRY_DECO_FACTORY()
     async def embed(self, query: str) -> List[float]:
-        logger.info(f"Called embed with {query = }")
+        logger.debug(f"Called embed with {query = }")
         headers = {
             "Authorization": f"Bearer {self._api_key}",
             "Content-Type": "application/json",

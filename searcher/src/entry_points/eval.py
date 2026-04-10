@@ -66,7 +66,7 @@ class EvalEntryPoint(AddDocumentEntryPoint):
 
         self._printer = ReportGenerator(
             skip_check=False,
-            knolage_base_files_paths=self._files_to_add,
+            knowledge_base_files_paths=self._files_to_add,
             eval_dataset_path=self._dataset_file_path,
             output_path=self._output_path / FILENAMES["report"],
             config_path=args.config,
@@ -121,6 +121,8 @@ class EvalEntryPoint(AddDocumentEntryPoint):
 
     @classmethod
     def add_subparser(cls, parser: ArgumentParser) -> None:
+        AddDocumentEntryPoint.add_subparser(parser)
+
         parser.add_argument("-o", "--output", type=Path, required=False, default=None)
         parser.add_argument(
             "-f",
@@ -129,14 +131,9 @@ class EvalEntryPoint(AddDocumentEntryPoint):
             choices=["json", "csv"],
         )
         parser.add_argument(
-            "-n",
-            "--n_of_parallel_requests",
-            default=10,
-            type=int,
-            required=False,
-        )
-        parser.add_argument(
-            "dataset_file",
+            "-d",
+            "--dataset_file",
+            required=True,
             type=Path,
             help="It must contain columns: query, correct_answer",
         )

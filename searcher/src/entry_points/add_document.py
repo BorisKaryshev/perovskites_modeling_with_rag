@@ -19,7 +19,7 @@ class AddDocumentEntryPoint(EntryPoint):
         super().__init__(args)
 
         self._files_to_add = [Path(i).absolute() for i in args.file_to_add]
-        self._n_of_files_to_add_in_parallel = args.n_of_files_to_add_in_parallel
+        self._n_of_parallel_requests = args.n_of_parallel_requests
 
         self._parser = DocumentParser.create(self._config["document_parser"]["type"])
         self._chunker = DocumentChunker.create(
@@ -34,7 +34,7 @@ class AddDocumentEntryPoint(EntryPoint):
     @classmethod
     def add_subparser(cls, parser: ArgumentParser) -> None:
         parser.add_argument(
-            "-n", "--n_of_files_to_add_in_parallel", type=int, default=3, required=False
+            "-n", "--n_of_parallel_requests", type=int, default=3, required=False
         )
         parser.add_argument("file_to_add", nargs="+", type=Path)
 
@@ -66,7 +66,7 @@ class AddDocumentEntryPoint(EntryPoint):
     async def _run_impl(self) -> None:
         logger.debug("entery_point started")
 
-        semathore = asyncio.Semaphore(self._n_of_files_to_add_in_parallel)
+        semathore = asyncio.Semaphore(self._n_of_parallel_requests)
 
         tasks = [self._worker(p, semathore) for p in self._files_to_add]
 

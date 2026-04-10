@@ -293,3 +293,5 @@ class ReportGenerator:
             self._print(
                 tabulate(rows, headers=columns, floatfmt=".2f", tablefmt="github")
             )
+
+        self._output_stream.flush()

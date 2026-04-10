@@ -1,10 +1,7 @@
-from copy import deepcopy
-from .interface import EntryPoint
 from .add_document import AddDocumentEntryPoint
 
 from src.evaluation import Metric, Evaluator
 from src.llm_providers import ChatProvider
-from src.rag_pipelines import RagPipeline
 from src.evaluation import ReportGenerator
 
 import asyncio
@@ -24,7 +21,7 @@ logger = logging.getLogger(__name__)
 DEFAULT_REPORTS_PATH = (
     Path(__file__).parent.parent.parent
     / Path("experimental_reports")
-    / Path(datetime.now().strftime("%Y_%m_%d-%H_%M_%s"))
+    / Path(datetime.now().strftime("%Y_%m_%d-%H_%M_%S"))
 )
 
 FILENAMES = {
@@ -51,7 +48,7 @@ class FileReader:
             yield from DictReader(f)
 
 
-class EvalEntryPoint(EntryPoint):
+class EvalEntryPoint(AddDocumentEntryPoint):
     def __init__(self, args: Namespace):
         super().__init__(args)
 
@@ -73,13 +70,6 @@ class EvalEntryPoint(EntryPoint):
             eval_dataset_path=self._dataset_file_path,
             output_path=self._output_path / FILENAMES["report"],
             config_path=args.config,
-        )
-
-        self._document_adder = AddDocumentEntryPoint(args)
-
-        self._rag = RagPipeline.create(
-            self._config["rag"].pop("type"),
-            config=self._config,
         )
 
         self._retrieval_metrics = [
@@ -190,7 +180,8 @@ class EvalEntryPoint(EntryPoint):
             response.prompt_tokens, response.completion_tokens, response.total_tokens
         )
 
-        self._printer.add_retrieval(**retrieval_scores)
+        if retrieval_scores:
+            self._printer.add_retrieval(**retrieval_scores)
 
         result = {
             "query": row["query"],
@@ -210,7 +201,7 @@ class EvalEntryPoint(EntryPoint):
         return result
 
     async def run(self) -> None:
-        await self._document_adder.run()
+        await super().run()
 
         queue = asyncio.Queue(self._n_of_parallel_requests)
         output_queue = asyncio.Queue()
@@ -272,6 +263,10 @@ class EvalEntryPoint(EntryPoint):
             open_func = open
             filename_modifier = ""
         with open_func(
-            str(self._output_path / FILENAMES["report_json"]) + filename_modifier
+            str(self._output_path / FILENAMES["report_json"]) + filename_modifier,
+            mode="w",
         ) as f:
-            json.dumps(self._printer.export_stats_as_dict())
+            try:
+                print(json.dumps(self._printer.export_stats_as_dict()), file=f)
+            except Exception:
+                logger.info(f"Got stats: {self._printer.export_stats_as_dict()}")

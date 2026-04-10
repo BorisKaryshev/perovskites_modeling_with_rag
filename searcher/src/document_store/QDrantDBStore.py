@@ -30,6 +30,7 @@ class QDrantDBStore(DocumentStore):
 
         self._client = AsyncQdrantClient(**kwargs)
         self._collection_name = collection_name
+        logger.info(f"Created QDrantDBStore with {collection_name = }")
         self._n_of_pointis_limit = limit
         self._force_recreate_collection = force_recreate_collection
         vectorizer_type = vectorizer.pop("vectorizer_type")

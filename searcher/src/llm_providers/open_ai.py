@@ -139,7 +139,7 @@ class OpenAIChatProvider(ChatProvider):
                         f"Failed to send request to OpenAI: {await response.json()}"
                     )
                 output = await response.json()
-                logger.debug(f"Got response from llm: {output}")
+                logger.info(f"Got response from llm: {output}")
 
                 return ChatVerboseResponse(
                     response=output["choices"][0]["message"]["content"],

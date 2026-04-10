@@ -138,25 +138,29 @@ class ReportGenerator:
             "git_commit": repo.head.commit.hexsha,
             "git_branch": repo.active_branch.name,
             "is_all_files_commited": not repo.is_dirty(untracked_files=True),
-            "knowledge_base_files_paths": self._knowledge_base_files_paths,
+            "knowledge_base_files_paths": [
+                str(p) for p in self._knowledge_base_files_paths
+            ],
         }
 
-        result["common"]["eval_dataset_path"] = self._eval_dataset_path
-        result["common"]["config_path"] = self._config_path
-        result["common"]["timestamp"] = datetime.now().astimezone()
+        result["common"]["eval_dataset_path"] = str(self._eval_dataset_path)
+        result["common"]["config_path"] = str(self._config_path)
+        result["common"]["timestamp"] = _format_datetime_with_offset(
+            datetime.now().astimezone()
+        )
 
         result["usages"] = {}
         for k, v in self._usages.items():
             result["usages"][k] = {
                 "n_of_records": len(v),
                 "sum": sum(v),
-                "mean": np.mean(v),
-                "min": np.min(v),
-                "p50": np.percentile(v, 50),
-                "p90": np.percentile(v, 90),
-                "p95": np.percentile(v, 95),
-                "p99": np.percentile(v, 99),
-                "max": np.max(v),
+                "mean": float(np.mean(v)),
+                "min": float(np.min(v)),
+                "p50": float(np.percentile(v, 50)),
+                "p90": float(np.percentile(v, 90)),
+                "p95": float(np.percentile(v, 95)),
+                "p99": float(np.percentile(v, 99)),
+                "max": float(np.max(v)),
             }
 
         if self._retrieval_is_relevant:
@@ -165,14 +169,14 @@ class ReportGenerator:
             _, cols = np.where(is_relevant_matrix == 1)
             all_positions = cols + 1
             avg_relevant_all = (
-                np.mean(all_positions) if len(all_positions) > 0 else np.nan
+                np.mean(all_positions) if len(all_positions) > 0 else None
             )
 
             first_indecies = np.argmax(is_relevant_matrix, axis=1)
             has_relevant = np.any(is_relevant_matrix == 1, axis=1)
             first_positions = first_indecies[has_relevant] + 1
             avg_relevant_first = (
-                np.mean(first_positions) if len(first_positions) > 0 else np.nan
+                np.mean(first_positions) if len(first_positions) > 0 else None
             )
 
             result["retrieval"] = {
@@ -208,7 +212,7 @@ class ReportGenerator:
         stats_dict = self.export_stats_as_dict()
 
         self._print("# Common information")
-        curr_datetime = _format_datetime_with_offset(stats_dict["common"]["timestamp"])
+        curr_datetime = stats_dict["common"]["timestamp"]
         self._print(f"Report was generated: {curr_datetime}")
         self._print(f"Git branch name: {stats_dict['common']['git_branch']}")
         self._print(f"Git commit: {stats_dict['common']['git_commit']}")
@@ -228,6 +232,7 @@ class ReportGenerator:
         else:
             for p in stats_dict["common"]["knowledge_base_files_paths"]:
                 self._print(f"- {p}", skip_space=True)
+        self._print("", skip_space=True)
 
         self._print("# Generation metrics")
         for metric_name, data in stats_dict["metrics"].items():
@@ -249,7 +254,8 @@ class ReportGenerator:
             self._print(
                 tabulate(rows, headers=columns, floatfmt=".2f", tablefmt="github")
             )
-
+        else:
+            self._print("No documents were retrieved during experiment")
         self._print("# Usage metrics")
         for usage_name, metrics in stats_dict["usages"].items():
             columns = [usage_name, "Value"]

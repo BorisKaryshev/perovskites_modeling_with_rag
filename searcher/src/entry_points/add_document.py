@@ -1,9 +1,8 @@
 from .interface import EntryPoint
 from src.common.workers_pool import WorkersPool
 
-from src.document_chunker import DocumentChunker
-from src.document_parser import DocumentParser
-from src.document_store import DocumentStore, DBSchema
+from src.document_store import DBSchema
+from src.rag_pipelines import RagPipeline
 
 import asyncio
 from argparse import ArgumentParser, Namespace
@@ -21,14 +20,9 @@ class AddDocumentEntryPoint(EntryPoint):
         self._files_to_add = [Path(i).absolute() for i in args.files_to_add]
         self._n_of_parallel_requests = args.n_of_parallel_requests
 
-        self._parser = DocumentParser.create(self._config["document_parser"]["type"])
-        self._chunker = DocumentChunker.create(
-            self._config["document_chunker"]["type"],
-            **self._config["document_chunker"]["options"],
-        )
-        self._store = DocumentStore.create(
-            self._config["document_store"]["type"],
-            **self._config["document_store"]["options"],
+        self._rag = RagPipeline.create(
+            self._config["rag"].pop("type"),
+            config=self._config,
         )
 
     @classmethod
@@ -38,37 +32,15 @@ class AddDocumentEntryPoint(EntryPoint):
         )
         parser.add_argument("files_to_add", nargs="+", type=Path)
 
-    async def add_file(self, file: Path):
-        begin = time.time()
-        content = await self._parser.parse_document(file)
-        chunked = await self._chunker.chunk_document(content)
-
-        async with asyncio.TaskGroup() as tg:
-            for idx, payload in chunked:
-                record = DBSchema(
-                    payload=payload,
-                    chunk_idx=idx,
-                    doc_path=file,
-                    doc_type=(await self._parser.get_doc_type(file)),
-                    created=(await self._parser.get_doc_creation_date(file)),
-                )
-                tg.create_task(self._store.add_record(record))
-
-        end = time.time()
-        logger.info(
-            f"Uploading file '{file}' in {len(chunked)} chunks took: {int((end - begin) * 1000)} ms"
-        )
-
-    async def _worker(self, path: Path, semathore: asyncio.Semaphore):
+    async def add_file(self, file: Path, semathore: asyncio.Semaphore):
         async with semathore:
-            await self.add_file(path)
+            await self._rag.add_document(file)
 
     async def _run_impl(self) -> None:
-        logger.debug("entery_point started")
 
         semathore = asyncio.Semaphore(self._n_of_parallel_requests)
 
-        tasks = [self._worker(p, semathore) for p in self._files_to_add]
+        tasks = [self.add_file(p, semathore) for p in self._files_to_add]
 
         asyncio.gather(*tasks)
 

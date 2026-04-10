@@ -18,7 +18,7 @@ class AddDocumentEntryPoint(EntryPoint):
     def __init__(self, args: Namespace):
         super().__init__(args)
 
-        self._files_to_add = [Path(i).absolute() for i in args.file_to_add]
+        self._files_to_add = [Path(i).absolute() for i in args.files_to_add]
         self._n_of_parallel_requests = args.n_of_parallel_requests
 
         self._parser = DocumentParser.create(self._config["document_parser"]["type"])
@@ -36,7 +36,7 @@ class AddDocumentEntryPoint(EntryPoint):
         parser.add_argument(
             "-n", "--n_of_parallel_requests", type=int, default=3, required=False
         )
-        parser.add_argument("file_to_add", nargs="+", type=Path)
+        parser.add_argument("files_to_add", nargs="+", type=Path)
 
     async def add_file(self, file: Path):
         begin = time.time()

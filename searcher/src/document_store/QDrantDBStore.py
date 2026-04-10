@@ -24,6 +24,10 @@ class QDrantDBStore(DocumentStore):
     ):
         super().__init__()
 
+        logger.debug(
+            f"While creating QDrantDBStore got vectorizer config: {vectorizer}"
+        )
+
         self._client = AsyncQdrantClient(**kwargs)
         self._collection_name = collection_name
         self._n_of_pointis_limit = limit

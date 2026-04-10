@@ -1,3 +1,4 @@
+from copy import deepcopy
 from .interface import EntryPoint
 from .add_document import AddDocumentEntryPoint
 
@@ -50,7 +51,7 @@ class FileReader:
             yield from DictReader(f)
 
 
-class EvalEntryPoint(AddDocumentEntryPoint):
+class EvalEntryPoint(EntryPoint):
     def __init__(self, args: Namespace):
         super().__init__(args)
 
@@ -58,6 +59,8 @@ class EvalEntryPoint(AddDocumentEntryPoint):
         self._input_format = args.input_format
         self._dataset_file_path = args.dataset_file
         self._output_path = args.output
+        self._files_to_add = args.files_to_add
+
         if not self._output_path:
             self._output_path = DEFAULT_REPORTS_PATH
         self._output_path.mkdir(exist_ok=True, parents=True)
@@ -65,12 +68,14 @@ class EvalEntryPoint(AddDocumentEntryPoint):
         self._not_compress = args.not_compress
 
         self._printer = ReportGenerator(
-            skip_check=False,
+            skip_check=args.skip_check,
             knowledge_base_files_paths=self._files_to_add,
             eval_dataset_path=self._dataset_file_path,
             output_path=self._output_path / FILENAMES["report"],
             config_path=args.config,
         )
+
+        self._document_adder = AddDocumentEntryPoint(args)
 
         self._rag = RagPipeline.create(
             self._config["rag"].pop("type"),
@@ -123,6 +128,7 @@ class EvalEntryPoint(AddDocumentEntryPoint):
     def add_subparser(cls, parser: ArgumentParser) -> None:
         AddDocumentEntryPoint.add_subparser(parser)
 
+        parser.add_argument("-s", "--skip_check", action="store_true", default=False)
         parser.add_argument("-o", "--output", type=Path, required=False, default=None)
         parser.add_argument(
             "-f",
@@ -204,7 +210,7 @@ class EvalEntryPoint(AddDocumentEntryPoint):
         return result
 
     async def run(self) -> None:
-        await super(AddDocumentEntryPoint, self).run()
+        await self._document_adder.run()
 
         queue = asyncio.Queue(self._n_of_parallel_requests)
         output_queue = asyncio.Queue()

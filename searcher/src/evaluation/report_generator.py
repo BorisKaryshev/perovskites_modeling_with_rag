@@ -1,5 +1,6 @@
 from .math_utils import ndcg_at_k, mrr_at_k_from_ordered_relevance
 
+from copy import deepcopy
 from collections import Counter, defaultdict
 from dataclasses import dataclass
 from datetime import datetime
@@ -42,7 +43,9 @@ class ReportGenerator:
         skip_check: bool = True,
         output_path: Optional[Path] = None,
         config_path: Optional[Path] = None,
+        knowledge_base_files_paths: List[Path] = [],
     ):
+        self._knowledge_base_files_paths = deepcopy(knowledge_base_files_paths)
         self._eval_dataset_path = eval_dataset_path
         self._config_path = config_path
 
@@ -135,6 +138,7 @@ class ReportGenerator:
             "git_commit": repo.head.commit.hexsha,
             "git_branch": repo.active_branch.name,
             "is_all_files_commited": not repo.is_dirty(untracked_files=True),
+            "knowledge_base_files_paths": self._knowledge_base_files_paths,
         }
 
         result["common"]["eval_dataset_path"] = self._eval_dataset_path
@@ -217,6 +221,13 @@ class ReportGenerator:
 
         if config_path := stats_dict["common"]["config_path"]:
             self._print(f"Path of config of experiment: {config_path}")
+
+        self._print("## Knowladge base content")
+        if not stats_dict["common"]["knowledge_base_files_paths"]:
+            self._print("Have no tracked files")
+        else:
+            for p in stats_dict["common"]["knowledge_base_files_paths"]:
+                self._print(f"- {p}", skip_space=True)
 
         self._print("# Generation metrics")
         for metric_name, data in stats_dict["metrics"].items():

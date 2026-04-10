@@ -59,25 +59,18 @@ class AddDocumentEntryPoint(EntryPoint):
             f"Uploading file '{file}' in {len(chunked)} chunks took: {int((end - begin) * 1000)} ms"
         )
 
-    async def _worker(self, queue: asyncio.Queue):
-        path = await queue.get()
-        while path is not None:
+    async def _worker(self, path: Path, semathore: asyncio.Semaphore):
+        async with semathore:
             await self.add_file(path)
-            path = await queue.get()
 
     async def _run_impl(self) -> None:
         logger.debug("entery_point started")
-        queue = asyncio.Queue(self._n_of_files_to_add_in_parallel)
 
-        async with asyncio.TaskGroup() as tg:
-            for _ in range(self._n_of_files_to_add_in_parallel):
-                tg.create_task(self._worker(queue))
+        semathore = asyncio.Semaphore(self._n_of_files_to_add_in_parallel)
 
-            for i in self._files_to_add:
-                await queue.put(i)
+        tasks = [self._worker(p, semathore) for p in self._files_to_add]
 
-            for _ in range(self._n_of_files_to_add_in_parallel):
-                await queue.put(None)
+        asyncio.gather(*tasks)
 
     async def run(self) -> None:
         n_of_workers = self._config.get("common", {}).get("n_of_workers")

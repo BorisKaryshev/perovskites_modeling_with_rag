@@ -1,6 +1,5 @@
-from collections import defaultdict
-from datetime import datetime
 from .interface import EntryPoint
+from .add_document import AddDocumentEntryPoint
 
 from src.evaluation import Metric, Evaluator
 from src.llm_providers import ChatProvider
@@ -8,6 +7,8 @@ from src.rag_pipelines import RagPipeline
 from src.evaluation import ReportGenerator
 
 import asyncio
+from collections import defaultdict
+from datetime import datetime
 from pathlib import Path
 from typing import Literal, Union
 from argparse import ArgumentParser, Namespace
@@ -49,7 +50,7 @@ class FileReader:
             yield from DictReader(f)
 
 
-class EvalEntryPoint(EntryPoint):
+class EvalEntryPoint(AddDocumentEntryPoint):
     def __init__(self, args: Namespace):
         super().__init__(args)
 
@@ -65,6 +66,7 @@ class EvalEntryPoint(EntryPoint):
 
         self._printer = ReportGenerator(
             skip_check=False,
+            knolage_base_files_paths=self._files_to_add,
             eval_dataset_path=self._dataset_file_path,
             output_path=self._output_path / FILENAMES["report"],
             config_path=args.config,
@@ -205,6 +207,8 @@ class EvalEntryPoint(EntryPoint):
         return result
 
     async def run(self) -> None:
+        await super(AddDocumentEntryPoint, self).run()
+
         queue = asyncio.Queue(self._n_of_parallel_requests)
         output_queue = asyncio.Queue()
 

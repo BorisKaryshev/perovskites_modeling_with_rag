@@ -236,7 +236,7 @@ class ReportGenerator:
             rows = data["values"]
 
             self._print(
-                tabulate(rows, headers=columns, floatfmt=".2f", tablefmt="grid")
+                tabulate(rows, headers=columns, floatfmt=".2f", tablefmt="github")
             )
 
         self._print("# Retrieval metrics")
@@ -247,7 +247,7 @@ class ReportGenerator:
             for k, v in stats_dict["retrieval"].items():
                 rows.append([k, v])
             self._print(
-                tabulate(rows, headers=columns, floatfmt=".2f", tablefmt="grid")
+                tabulate(rows, headers=columns, floatfmt=".2f", tablefmt="github")
             )
 
         self._print("# Usage metrics")
@@ -258,5 +258,5 @@ class ReportGenerator:
             for k, v in metrics.items():
                 rows.append([k, v])
             self._print(
-                tabulate(rows, headers=columns, floatfmt=".2f", tablefmt="grid")
+                tabulate(rows, headers=columns, floatfmt=".2f", tablefmt="github")
             )

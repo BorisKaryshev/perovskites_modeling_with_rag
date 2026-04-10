@@ -61,6 +61,9 @@ class ReportGenerator:
         self._config_path = config_path
         self._base_path = base_path
 
+        self._is_all_files_tracked_by_git = not Repo(
+            __file__, search_parent_directories=True
+        ).is_dirty(untracked_files=True)
         if not skip_check and not self.is_valid_for_generation():
             raise RuntimeError("Failed check for report generation")
 
@@ -159,7 +162,7 @@ class ReportGenerator:
         result["common"] = {
             "git_commit": repo.head.commit.hexsha,
             "git_branch": repo.active_branch.name,
-            "is_all_files_commited": not repo.is_dirty(untracked_files=True),
+            "is_all_files_commited": self._is_all_files_tracked_by_git,
             "knowledge_base_files_paths": [
                 _create_markdown_link(p, self._base_path)
                 for p in self._knowledge_base_files_paths

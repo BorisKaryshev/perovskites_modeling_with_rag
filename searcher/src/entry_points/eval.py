@@ -1,3 +1,4 @@
+import git
 from .add_document import AddDocumentEntryPoint
 
 from src.evaluation import Metric, Evaluator
@@ -201,6 +202,13 @@ class EvalEntryPoint(AddDocumentEntryPoint):
         }
         return result
 
+    def commit(self):
+        repo = git.Repo(__file__, search_parent_directories=True)
+
+        repo.index.add(self._output_path)
+        repo.index.commit("[AUTO] Adding experimental report")
+        repo.git.push()
+
     async def run(self) -> None:
         await super().run()
 
@@ -273,3 +281,5 @@ class EvalEntryPoint(AddDocumentEntryPoint):
                 print(json.dumps(self._printer.export_stats_as_dict()), file=f)
             except Exception:
                 logger.info(f"Got stats: {self._printer.export_stats_as_dict()}")
+
+        self._commit()

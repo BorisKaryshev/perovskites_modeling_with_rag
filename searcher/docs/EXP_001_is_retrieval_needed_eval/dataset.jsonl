@@ -1,0 +1,289 @@
+{"doc_name":"all-inorganic-perovskite-solar-cells.pdf","query":"What inorganic perovskite was used as the light absorber in the solar cells?","correct_answer":"CsPbBr3"}
+{"doc_name":"all-inorganic-perovskite-solar-cells.pdf","query":"What was the optical band gap of CsPbBr3?","correct_answer":"About 2.3 eV"}
+{"doc_name":"all-inorganic-perovskite-solar-cells.pdf","query":"What was the highest power conversion efficiency reported for the first-generation all-inorganic PSCs?","correct_answer":"6.7%"}
+{"doc_name":"all-inorganic-perovskite-solar-cells.pdf","query":"What was the open-circuit voltage of the CsPbBr3/carbon-based all-inorganic PSCs?","correct_answer":"1.24 V"}
+{"doc_name":"all-inorganic-perovskite-solar-cells.pdf","query":"What was the optimized active area of the all-inorganic PSCs?","correct_answer":"0.12 cm²"}
+{"doc_name":"all-inorganic-perovskite-solar-cells.pdf","query":"About how thick was the CsPbBr3 layer in the cross-sectional device image?","correct_answer":"About 600 nm"}
+{"doc_name":"all-inorganic-perovskite-solar-cells.pdf","query":"About how thick was the carbon capping layer?","correct_answer":"About 900 nm"}
+{"doc_name":"all-inorganic-perovskite-solar-cells.pdf","query":"What was the average diameter of the carbon nanoparticles in the electrode?","correct_answer":"About 80 nm"}
+{"doc_name":"all-inorganic-perovskite-solar-cells.pdf","query":"Light with wavelengths shorter than about what value was absorbed by CsPbBr3?","correct_answer":"About 540 nm"}
+{"doc_name":"all-inorganic-perovskite-solar-cells.pdf","query":"For how long did the CsPbBr3/carbon-based all-inorganic PSCs show no performance degradation in humid air without encapsulation?","correct_answer":"More than 3 months (2640 h)"}
+{"doc_name":"all-inorganic-perovskite-solar-cells.pdf","query":"Which device was more stable in humid air without encapsulation: CsPbBr3/carbon-based all-inorganic PSCs or MAPbI3/carbon-based hybrid PSCs?","correct_answer":"CsPbBr3/carbon-based all-inorganic PSCs"}
+{"doc_name":"all-inorganic-perovskite-solar-cells.pdf","query":"Which hybrid device degraded faster in humid air without encapsulation: MAPbI3/carbon-based or MAPbI3/spiro-MeOTAD-based PSCs?","correct_answer":"MAPbI3/spiro-MeOTAD-based hybrid PSCs"}
+{"doc_name":"all-inorganic-perovskite-solar-cells.pdf","query":"Which has the larger band gap, CsPbBr3 or cubic-phase CsPbI3?","correct_answer":"CsPbBr3"}
+{"doc_name":"all-inorganic-perovskite-solar-cells.pdf","query":"Which device had the higher PCE under sealed conditions: CsPbBr3/carbon-based or CsPbI3/carbon-based all-inorganic PSCs?","correct_answer":"CsPbBr3/carbon-based all-inorganic PSCs"}
+{"doc_name":"all-inorganic-perovskite-solar-cells.pdf","query":"Between which two temperatures were the stability cycles performed for the all-inorganic PSCs?","correct_answer":"Between -22°C and 100°C"}
+{"doc_name":"all-inorganic-perovskite-solar-cells.pdf","query":"What was the layer sequence of the all-inorganic PSCs from bottom to top?","correct_answer":"FTO/c-TiO2/m-TiO2/CsPbBr3/carbon"}
+{"doc_name":"all-inorganic-perovskite-solar-cells.pdf","query":"What made the MAPbI3/spiro-MeOTAD-based hybrid PSCs the least stable of the three devices tested?","correct_answer":"The deliquescent MAPbI3 and the hygroscopic additives LiTFSI and tBP in spiro-MeOTAD"}
+{"doc_name":"all-inorganic-perovskite-solar-cells.pdf","query":"What allowed the all-inorganic PSC fabrication process to be carried out in ambient air without humidity control?","correct_answer":"The high stability of the all-inorganic components"}
+{"doc_name":"all-inorganic-perovskite-solar-cells.pdf","query":"Why was CsPbBr3 preferred over CsPbI3 for all-inorganic PSCs?","correct_answer":"CsPbBr3 remained stable in humid air, while CsPbI3 rapidly converted to the non-perovskite orthorhombic phase"}
+{"doc_name":"general-working-principles-of-ch3nh3pbx3-perovskite-solar-cells.pdf","query":"What conversion efficiency had organometal halide perovskite-based solar cells recently realized?","correct_answer":"over 15%"}
+{"doc_name":"general-working-principles-of-ch3nh3pbx3-perovskite-solar-cells.pdf","query":"Which halide atoms can X be in CH3NH3PbX3?","correct_answer":"I, Cl, Br, or a combination of these"}
+{"doc_name":"general-working-principles-of-ch3nh3pbx3-perovskite-solar-cells.pdf","query":"What active electrode area was obtained per pixel after etching the FTO substrates?","correct_answer":"0.224 cm2"}
+{"doc_name":"general-working-principles-of-ch3nh3pbx3-perovskite-solar-cells.pdf","query":"What was the sheet resistance of the FTO substrate?","correct_answer":"15 Ω/sq"}
+{"doc_name":"general-working-principles-of-ch3nh3pbx3-perovskite-solar-cells.pdf","query":"How thick was the compact TiO2 layer?","correct_answer":"approximately 50 nm"}
+{"doc_name":"general-working-principles-of-ch3nh3pbx3-perovskite-solar-cells.pdf","query":"How thick were the porous TiO2 films deposited onto ZnO substrates?","correct_answer":"568 nm"}
+{"doc_name":"general-working-principles-of-ch3nh3pbx3-perovskite-solar-cells.pdf","query":"How thick was the gold electrode contact layer?","correct_answer":"60 nm"}
+{"doc_name":"general-working-principles-of-ch3nh3pbx3-perovskite-solar-cells.pdf","query":"What voltage perturbation was applied in the impedance spectroscopy measurements?","correct_answer":"30 mV"}
+{"doc_name":"general-working-principles-of-ch3nh3pbx3-perovskite-solar-cells.pdf","query":"What frequency range was used for the impedance spectroscopy measurements?","correct_answer":"400 kHz to 0.05 Hz"}
+{"doc_name":"general-working-principles-of-ch3nh3pbx3-perovskite-solar-cells.pdf","query":"What photoconversion efficiency did the thinfilm cell reach?","correct_answer":"8.5%"}
+{"doc_name":"general-working-principles-of-ch3nh3pbx3-perovskite-solar-cells.pdf","query":"Which cell had the higher short-circuit current, the thinfilm cell or the nanostructured cell?","correct_answer":"The thinfilm cell"}
+{"doc_name":"general-working-principles-of-ch3nh3pbx3-perovskite-solar-cells.pdf","query":"Which sample had the lower recombination resistance at low voltage?","correct_answer":"The nanostructured sample"}
+{"doc_name":"general-working-principles-of-ch3nh3pbx3-perovskite-solar-cells.pdf","query":"Which sample had the larger diffusion length at low voltage, the thinfilm sample or the nanostructured sample?","correct_answer":"The thinfilm sample"}
+{"doc_name":"general-working-principles-of-ch3nh3pbx3-perovskite-solar-cells.pdf","query":"Which cell had the higher open-circuit voltage?","correct_answer":"The thinfilm cell"}
+{"doc_name":"general-working-principles-of-ch3nh3pbx3-perovskite-solar-cells.pdf","query":"If the nanostructured sample is measured above 0.5 V forward bias, what impedance pattern appears?","correct_answer":"Gerischer pattern"}
+{"doc_name":"general-working-principles-of-ch3nh3pbx3-perovskite-solar-cells.pdf","query":"What perovskite composition was used in the nanostructured device, and what scaffold supported it?","correct_answer":"CH3NH3PbI3 on a TiO2 scaffold"}
+{"doc_name":"general-working-principles-of-ch3nh3pbx3-perovskite-solar-cells.pdf","query":"Which electron selective contact was used in the nanostructured device?","correct_answer":"Compact ZnO"}
+{"doc_name":"general-working-principles-of-ch3nh3pbx3-perovskite-solar-cells.pdf","query":"What hole selective contact material was used in both device types, and what is its full chemical name?","correct_answer":"Spiro-MeOTAD, 2,2′,7,7′-tetrakis-(N,N-di-p-methoxyphenylamine)-9,9(spirobifluorene)"}
+{"doc_name":"general-working-principles-of-ch3nh3pbx3-perovskite-solar-cells.pdf","query":"Which deposition method was used for the full iodide perovskite in the nanostructured device, and in what solvent was PbI2 dissolved?","correct_answer":"Two-step sequential deposition; N,N-dimethylformamide"}
+{"doc_name":"liu2017.pdf","query":"What space group does ideal perovskite crystallize in?","correct_answer":"Pm3m"}
+{"doc_name":"liu2017.pdf","query":"What is the chemical formula of perovskite?","correct_answer":"ABO3"}
+{"doc_name":"liu2017.pdf","query":"How many oxygen neighbors coordinate the A-site cation in ideal perovskite?","correct_answer":"12 oxygen neighbors"}
+{"doc_name":"liu2017.pdf","query":"How many oxygen ions coordinate the B-site cation in ideal perovskite?","correct_answer":"6 oxygen ions"}
+{"doc_name":"liu2017.pdf","query":"Below what temperature is EuTiO3 a G-type antiferromagnet?","correct_answer":"5.3 K"}
+{"doc_name":"liu2017.pdf","query":"Below what temperature does BiMnO3 show direct ferromagnetic order?","correct_answer":"110 K"}
+{"doc_name":"liu2017.pdf","query":"What is the magnetic ordering temperature TN of Pb(Fe2/3W1/3)O3?","correct_answer":"350 K"}
+{"doc_name":"liu2017.pdf","query":"What is the Curie temperature TC of Pb(Fe1/2Nb1/2)O3?","correct_answer":"370 K"}
+{"doc_name":"liu2017.pdf","query":"What polarization value can be rotated by 90 degrees in TbMnO3?","correct_answer":"0.08 uC/cm^2"}
+{"doc_name":"liu2017.pdf","query":"What polarization value in single-crystal BiFeO3 can be controlled by a magnetic field?","correct_answer":"0.02 uC/cm^2"}
+{"doc_name":"liu2017.pdf","query":"Which has the higher magnetic ordering temperature, Pb(Fe2/3W1/3)O3 or Pb(Fe1/2Nb1/2)O3?","correct_answer":"Pb(Fe2/3W1/3)O3"}
+{"doc_name":"liu2017.pdf","query":"Which has the higher Curie temperature, Pb(Fe1/2Nb1/2)O3 or Pb(Fe1/2Ta1/2)O3?","correct_answer":"Pb(Fe1/2Nb1/2)O3"}
+{"doc_name":"liu2017.pdf","query":"Which has the larger reported room-temperature remanent polarization in thin films, BiMnO3 thin films with double SrTiO3 buffer layers or BiMnO3 ceramics?","correct_answer":"BiMnO3 thin films with double SrTiO3 buffer layers"}
+{"doc_name":"liu2017.pdf","query":"Which EuTiO3 structural transition temperature is higher, 282 K or 235 K?","correct_answer":"282 K"}
+{"doc_name":"liu2017.pdf","query":"Which has the larger measured intrinsic ferroelectric polarization in orthorhombic HoMnO3, 0.009 uC/cm^2 or 0.24 uC/cm^2?","correct_answer":"0.24 uC/cm^2"}
+{"doc_name":"liu2017.pdf","query":"Which material is a G-type antiferromagnet below 5.3 K and is predicted to become multiferroic under large biaxial compressive strain?","correct_answer":"EuTiO3"}
+{"doc_name":"liu2017.pdf","query":"Which perovskite has Bi3+ at the A site and Fe3+ at the B site and is noted for canted ferromagnetism in thin films?","correct_answer":"BiFeO3"}
+{"doc_name":"liu2017.pdf","query":"Which relaxor ferroelectric with G-type antiferromagnetic order has the highest magnetic ordering temperature among Pb(Fe2/3W1/3)O3, Pb(Fe1/2Nb1/2)O3, and Pb(Fe1/2Ta1/2)O3?","correct_answer":"Pb(Fe2/3W1/3)O3 (PFW)"}
+{"doc_name":"liu2017.pdf","query":"Which material has direct ferromagnetic order below 110 K, controversial ferroelectricity, and thin-film remanent polarization of about 9-16 uC/cm^2 with double SrTiO3 buffer layers?","correct_answer":"BiMnO3"}
+{"doc_name":"liu2017.pdf","query":"Which orthorhombic perovskite was predicted to have about 6 uC/cm^2 polarization, shows large magnetodielectric effects, and was synthesized by soft-chemistry conditions?","correct_answer":"HoMnO3"}
+{"doc_name":"nontemplate-synthesis-of-ch3nh3pbbr3-perovskite-nanoparticles.pdf","query":"What was the average size of the octylammonium-stabilized perovskite nanoparticles?","correct_answer":"6.2 ± 1.1 nm"}
+{"doc_name":"nontemplate-synthesis-of-ch3nh3pbbr3-perovskite-nanoparticles.pdf","query":"At what wavelength did the P OA2 colloidal solution absorb most strongly in toluene?","correct_answer":"527 nm"}
+{"doc_name":"nontemplate-synthesis-of-ch3nh3pbbr3-perovskite-nanoparticles.pdf","query":"At what wavelength did the P OA2 colloidal solution emit most strongly?","correct_answer":"530 nm"}
+{"doc_name":"nontemplate-synthesis-of-ch3nh3pbbr3-perovskite-nanoparticles.pdf","query":"What was the photoluminescence quantum yield of the P OA2 colloidal solution?","correct_answer":"17%"}
+{"doc_name":"nontemplate-synthesis-of-ch3nh3pbbr3-perovskite-nanoparticles.pdf","query":"What was the emission full width at half maximum of P OA2?","correct_answer":"21 nm"}
+{"doc_name":"nontemplate-synthesis-of-ch3nh3pbbr3-perovskite-nanoparticles.pdf","query":"How long were the crystalline P OA2 nanoparticles stable in the solid state?","correct_answer":"More than three months"}
+{"doc_name":"nontemplate-synthesis-of-ch3nh3pbbr3-perovskite-nanoparticles.pdf","query":"Which two solvents caused the P OA2 colloidal solution to become immediately colorless?","correct_answer":"DMSO and isopropanol"}
+{"doc_name":"nontemplate-synthesis-of-ch3nh3pbbr3-perovskite-nanoparticles.pdf","query":"What lattice parameter a was obtained from Pawley refinement for P OA2?","correct_answer":"5.9334(5) Å"}
+{"doc_name":"nontemplate-synthesis-of-ch3nh3pbbr3-perovskite-nanoparticles.pdf","query":"What space group was assigned to the solid P OA2 sample?","correct_answer":"Pm-3m"}
+{"doc_name":"nontemplate-synthesis-of-ch3nh3pbbr3-perovskite-nanoparticles.pdf","query":"What Br/Pb ratio was measured by EDS for P OA2?","correct_answer":"77/23"}
+{"doc_name":"nontemplate-synthesis-of-ch3nh3pbbr3-perovskite-nanoparticles.pdf","query":"Among P ODA1, P ODA2, and P ODA3, which sample had the highest emission maximum?","correct_answer":"P ODA1"}
+{"doc_name":"nontemplate-synthesis-of-ch3nh3pbbr3-perovskite-nanoparticles.pdf","query":"Among P ODA1, P ODA2, and P ODA3, which sample had the narrowest emission band?","correct_answer":"P ODA3"}
+{"doc_name":"nontemplate-synthesis-of-ch3nh3pbbr3-perovskite-nanoparticles.pdf","query":"Between octylammonium bromide and octadecylammonium bromide, which gave the higher fluorescence in the nanoparticles?","correct_answer":"Octylammonium bromide"}
+{"doc_name":"nontemplate-synthesis-of-ch3nh3pbbr3-perovskite-nanoparticles.pdf","query":"Between P OA2 and P ODA2, which sample had the higher fluorescence?","correct_answer":"P OA2"}
+{"doc_name":"nontemplate-synthesis-of-ch3nh3pbbr3-perovskite-nanoparticles.pdf","query":"Between toluene and DMSO, in which solvent did P OA2 remain dispersed?","correct_answer":"Toluene"}
+{"doc_name":"nontemplate-synthesis-of-ch3nh3pbbr3-perovskite-nanoparticles.pdf","query":"Which octadecylammonium-to-methylammonium molar ratio corresponded to P ODA3?","correct_answer":"0.7:0.3"}
+{"doc_name":"nontemplate-synthesis-of-ch3nh3pbbr3-perovskite-nanoparticles.pdf","query":"Which sample used an octylammonium-to-methylammonium molar ratio of 0.6:0.4 and had an emission maximum at 530 nm?","correct_answer":"P OA2"}
+{"doc_name":"nontemplate-synthesis-of-ch3nh3pbbr3-perovskite-nanoparticles.pdf","query":"On what substrate was the P OA2 thin film spin-coated?","correct_answer":"A quartz substrate"}
+{"doc_name":"nontemplate-synthesis-of-ch3nh3pbbr3-perovskite-nanoparticles.pdf","query":"What crystal structure, space group, and lattice parameter were assigned to the solid P OA2 sample?","correct_answer":"Cubic CH3NH3PbBr3, Pm-3m, a = 5.9334(5) Å"}
+{"doc_name":"Perovskite photonic sources.pdf","query":"What is the general crystal structure of perovskites?","correct_answer":"ABX3"}
+{"doc_name":"Perovskite photonic sources.pdf","query":"What emission wavelength range is reported for CH3NH3PbXnY3-n perovskites?","correct_answer":"390–790 nm"}
+{"doc_name":"Perovskite photonic sources.pdf","query":"To what wavelength can emission be extended by mixing methylammonium with (NH2)2CH+?","correct_answer":"820 nm"}
+{"doc_name":"Perovskite photonic sources.pdf","query":"What emission wavelength range is reported for colloidal CsPbX3 quantum dots?","correct_answer":"410–700 nm"}
+{"doc_name":"Perovskite photonic sources.pdf","query":"What is the smallest Urbach energy reported for perovskites?","correct_answer":"15 meV"}
+{"doc_name":"Perovskite photonic sources.pdf","query":"What is the Stokes shift reported for perovskites?","correct_answer":"Less than 20 meV"}
+{"doc_name":"Perovskite photonic sources.pdf","query":"What charge-carrier mobility is reported for perovskites?","correct_answer":"In excess of 10 cm2 V-1 s-1"}
+{"doc_name":"Perovskite photonic sources.pdf","query":"What diffusion length is reported for perovskites?","correct_answer":"Up to 1 μm and beyond"}
+{"doc_name":"Perovskite photonic sources.pdf","query":"What trap density is reported for perovskites?","correct_answer":"Less than 10^16 cm-3"}
+{"doc_name":"Perovskite photonic sources.pdf","query":"What is the largest reported peak luminance of perovskite LEDs?","correct_answer":"20,000 cd m-2"}
+{"doc_name":"Perovskite photonic sources.pdf","query":"If the emitter is the layered (C6H5C2H4NH3)2PbI4 perovskite, at what temperature was electroluminescence demonstrated?","correct_answer":"Cryogenic temperatures"}
+{"doc_name":"Perovskite photonic sources.pdf","query":"Which had the higher peak EQE: green perovskite LEDs or near-infrared perovskite LEDs?","correct_answer":"Green perovskite LEDs, with a peak EQE of 8.5%, versus 3.5% for near-infrared perovskite LEDs"}
+{"doc_name":"Perovskite photonic sources.pdf","query":"Which had the lower lasing threshold: CH3NH3PbBr3 microdisks or CH3NH3PbI3 polygonal plates?","correct_answer":"CH3NH3PbBr3 microdisks, with a threshold of 3.6 μJ cm-2, versus 37 μJ cm-2 for CH3NH3PbI3 polygonal plates"}
+{"doc_name":"Perovskite photonic sources.pdf","query":"Which had the higher net modal gain: CsPbX3 nanocrystals or perovskite thin films?","correct_answer":"CsPbX3 nanocrystals, with net modal gain greater than 450 ± 30 cm-1, versus 66–250 cm-1 for perovskite thin films"}
+{"doc_name":"Perovskite photonic sources.pdf","query":"Which had the longer diffusion length: perovskite single crystals or perovskite thin films?","correct_answer":"Perovskite single crystals, with diffusion lengths exceeding 5 μm, versus up to 1 μm in thin films"}
+{"doc_name":"Perovskite photonic sources.pdf","query":"What cavity structure was used in the first reported trihalide perovskite laser, and what free spectral range did it produce?","correct_answer":"A vertical surface-emitting Fabry-Pérot cavity; 9.5 THz"}
+{"doc_name":"Perovskite photonic sources.pdf","query":"Which active layer, ETL, and HTL were used in the near-infrared early perovskite LED?","correct_answer":"CH3NH3PbI3 active layer, TiO2 ETL, and F8 HTL"}
+{"doc_name":"Perovskite photonic sources.pdf","query":"What material and performance metrics were reported for lead halide perovskite nanowire lasers?","correct_answer":"Lead halide perovskite nanowire lasers with lasing thresholds as low as 220 nJ cm-2 and quality factors of 3600"}
+{"doc_name":"Perovskite photonic sources.pdf","query":"What material and threshold were reported for the first perovskite distributed feedback cavity laser?","correct_answer":"A structured organic-inorganic perovskite; threshold as low as 0.32 μJ cm-2"}
+{"doc_name":"Perovskite photonic sources.pdf","query":"Which perovskite nanocrystal system showed room-temperature single-photon emission, and what advantages over traditional metal chalcogenide nonlinear emitters were noted?","correct_answer":"CsPbX3 nanocrystals; increased absorption cross-section, faster radiative recombination, and reduced dark exciton emission"}
+{"doc_name":"Perovskite.pdf","query":"What is the chemical composition of the mineral perovskite?","correct_answer":"CaTiO3"}
+{"doc_name":"Perovskite.pdf","query":"Which compound typifies the ideal perovskite structure?","correct_answer":"SrTiO3"}
+{"doc_name":"Perovskite.pdf","query":"What is the lattice parameter a of ideal SrTiO3 perovskite?","correct_answer":"3.905 Å"}
+{"doc_name":"Perovskite.pdf","query":"What space group is given for ideal SrTiO3 perovskite?","correct_answer":"Pm3m"}
+{"doc_name":"Perovskite.pdf","query":"What dielectric constant is given for mica in the text?","correct_answer":"10"}
+{"doc_name":"Perovskite.pdf","query":"At what temperature range was BaTiO3 synthesized by the hydrothermal-electrochemical method?","correct_answer":"100–200 °C"}
+{"doc_name":"Perovskite.pdf","query":"At what temperature range does Ba(Mg1/3Ta2/3)O3 grow congruently from the melt?","correct_answer":"2900–3100 °C"}
+{"doc_name":"Perovskite.pdf","query":"Which method forms BaTiO3 at a lower temperature: conventional furnace synthesis or microwave synthesis?","correct_answer":"Microwave synthesis"}
+{"doc_name":"Perovskite.pdf","query":"Which substrate candidate has the lower dielectric loss at 90 K: LaAlO3 or Ba(Mg1/3Ta2/3)O3 ceramic?","correct_answer":"Ba(Mg1/3Ta2/3)O3 ceramic"}
+{"doc_name":"Perovskite.pdf","query":"Which has the larger dielectric constant at 90 K: LaAlO3 or Sr(Al1/2Ta1/2)O3?","correct_answer":"LaAlO3"}
+{"doc_name":"Perovskite.pdf","query":"Which material was identified as a promising substitute dielectric during WWII and later almost totally displaced mica?","correct_answer":"BaTiO3"}
+{"doc_name":"Perovskite.pdf","query":"What is the true high-Tc superconducting material identified from the YBC superconductor mixture?","correct_answer":"YBa2Cu3O7-δ"}
+{"doc_name":"Perovskite.pdf","query":"Which mantle-related perovskite is said to form at about 250 kbars and 1000–1400 °C?","correct_answer":"(Mg,Fe)SiO3 perovskite"}
+{"doc_name":"Perovskite.pdf","query":"Which material is described as one of the most refractory oxides and also grows congruently from the melt at 2900–3100 °C?","correct_answer":"Ba(Mg1/3Ta2/3)O3"}
+{"doc_name":"Perovskite.pdf","query":"Which material is both listed as a capacitor/PTC material and given as a simple ferroelectric with Tc 130 °C?","correct_answer":"BaTiO3"}
+{"doc_name":"progress-in-perovskite-photocatalysis.pdf","query":"Which halide ions are mentioned for tuning the bandgap of metal halide perovskites?","correct_answer":"Cl, Br, and I"}
+{"doc_name":"progress-in-perovskite-photocatalysis.pdf","query":"What are the two major limitations of using metal halide perovskites as photocatalysts?","correct_answer":"Chemical instability in polar solvents and surface vulnerability to transformation by chemical species in solution"}
+{"doc_name":"progress-in-perovskite-photocatalysis.pdf","query":"What does surface modification with organic molecules, polymers, or inorganic oxides/chalcogenides help protect?","correct_answer":"Semiconductor nanocrystals and surface defects"}
+{"doc_name":"progress-in-perovskite-photocatalysis.pdf","query":"What inorganic shell was used to cap CsPbBr3 to enable photocatalytic experiments in water?","correct_answer":"ZnS"}
+{"doc_name":"progress-in-perovskite-photocatalysis.pdf","query":"Which technique was used to probe selective electron and hole transfer from CsPbBr3 nanoplatelets?","correct_answer":"Transient absorption spectroscopy"}
+{"doc_name":"progress-in-perovskite-photocatalysis.pdf","query":"Which molecular acceptors were used in the CsPbBr3 nanoplatelet charge-transfer study?","correct_answer":"Benzoquinone and phenothiazine"}
+{"doc_name":"progress-in-perovskite-photocatalysis.pdf","query":"In the CsPbBr3-methyl viologen system, where is the hole residing?","correct_answer":"In CsPbBr3"}
+{"doc_name":"progress-in-perovskite-photocatalysis.pdf","query":"Which redox couple was used to study interfacial electron transfer to and from CsPbBr3 nanocrystals?","correct_answer":"Ferrocenium/ferrocene (Fc+/Fc0)"}
+{"doc_name":"progress-in-perovskite-photocatalysis.pdf","query":"What is the thickness range of the PCBM + TiO2 hybrid electron transport layer?","correct_answer":"18–40 nm"}
+{"doc_name":"progress-in-perovskite-photocatalysis.pdf","query":"What product does all-inorganic CsPbBr3 nanocrystal photocatalysis reduce CO2 to in the gram-scale mechanochemical synthesis example?","correct_answer":"Methane"}
+{"doc_name":"progress-in-perovskite-photocatalysis.pdf","query":"Compared with metal halide perovskites, which materials reigned over photocatalysis for the past few decades?","correct_answer":"Semiconductor oxides and metal chalcogenides"}
+{"doc_name":"progress-in-perovskite-photocatalysis.pdf","query":"Which had the stronger application focus in the text: solar cells or photocatalysis?","correct_answer":"Solar cells"}
+{"doc_name":"progress-in-perovskite-photocatalysis.pdf","query":"Which is more suitable for photocatalytic experiments in water: bare CsPbBr3 or ZnS-capped CsPbBr3?","correct_answer":"ZnS-capped CsPbBr3"}
+{"doc_name":"progress-in-perovskite-photocatalysis.pdf","query":"If a long-lived charge-separated state forms in a CsPbBr3-methyl viologen system, where is the electron located?","correct_answer":"On the surface-bound methyl viologen moiety"}
+{"doc_name":"progress-in-perovskite-photocatalysis.pdf","query":"For hydrogen generation in aqueous solution, which pair of acids maintained the stability of perovskite nanocrystals?","correct_answer":"HI and HBr"}
+{"doc_name":"progress-in-perovskite-photocatalysis.pdf","query":"Which lead-free perovskite nanocrystal hybrid was reported to enhance charge carrier lifetime and promote interfacial charge transfer?","correct_answer":"Cs2SnI6 perovskite nanocrystal/SnS2 nanosheet hybrid"}
+{"doc_name":"progress-in-perovskite-photocatalysis.pdf","query":"Which deposition method was used to grow the PCBM + TiO2 film over the perovskite film?","correct_answer":"Atomic layer deposition"}
+{"doc_name":"progress-in-perovskite-photocatalysis.pdf","query":"Which substrates were used to support CsPbBr3 nanocrystals for photocatalytic CO2 reduction?","correct_answer":"Graphene oxide, MXene sheets, and zeolitic imidazolate framework"}
+{"doc_name":"progress-in-perovskite-photocatalysis.pdf","query":"Which perovskite nanocrystal grown on MXene nanosheets improved both photoelectric detection and photocatalytic CO2 reduction?","correct_answer":"CsPbBr3"}
+{"doc_name":"progress-in-perovskite-photocatalysis.pdf","query":"Which reaction was enabled by perovskite nanocrystals deployed as gas diffusion electrodes or in gaseous catalytic reaction?","correct_answer":"Visible light-induced photocatalytic reduction of CO2"}
+{"doc_name":"s40820-021-00672-w.pdf","query":"What was the highest power conversion efficiency reported for perovskite solar cells?","correct_answer":"25.5%"}
+{"doc_name":"s40820-021-00672-w.pdf","query":"What was the certified efficiency of the over 800 cm^2 perovskite solar cell sub-module?","correct_answer":"about 18%"}
+{"doc_name":"s40820-021-00672-w.pdf","query":"What was the highest certified efficiency of perovskite-based tandem solar cells?","correct_answer":"over 29%"}
+{"doc_name":"s40820-021-00672-w.pdf","query":"What was the highest certified efficiency of lead-free perovskite solar cells?","correct_answer":"11.22%"}
+{"doc_name":"s40820-021-00672-w.pdf","query":"What molar fraction of formate anions was used to treat FAPbI3 perovskite films?","correct_answer":"2%"}
+{"doc_name":"s40820-021-00672-w.pdf","query":"After formate anion treatment, about what grain size was obtained for FAPbI3 perovskite films?","correct_answer":"about 2 µm"}
+{"doc_name":"s40820-021-00672-w.pdf","query":"What trap density was reported for the millimeter-sized MAPbI3 grains?","correct_answer":"9.7 × 10^13 cm^-3"}
+{"doc_name":"s40820-021-00672-w.pdf","query":"What spacing was used for the TiO2 nanorods in the nanopatterned interface?","correct_answer":"300 nm"}
+{"doc_name":"s40820-021-00672-w.pdf","query":"What fill factor was achieved by the PSCs using the ALD TiO2 nanopattern interface?","correct_answer":"83.9%"}
+{"doc_name":"s40820-021-00672-w.pdf","query":"Which material was incorporated to inhibit degradation caused by inward migration of gold into the perovskite layer?","correct_answer":"P3HT"}
+{"doc_name":"s40820-021-00672-w.pdf","query":"Which anion showed larger binding affinity toward iodide vacancy sites than Cl-, Br-, and BF4-?","correct_answer":"Formate anion (HCOO^-)"}
+{"doc_name":"s40820-021-00672-w.pdf","query":"Which fluorinated spiro-OMeTAD analogue lowered the HOMO level to -5.19 eV?","correct_answer":"spiro-mF"}
+{"doc_name":"s40820-021-00672-w.pdf","query":"Which electron transport layer had the shallower LUMO in tin PSCs, ICBA or PCBM?","correct_answer":"ICBA"}
+{"doc_name":"s40820-021-00672-w.pdf","query":"Which had the higher retained post-burn-in efficiency after aging with [BMP+][BF4-] additives, unencapsulated PSCs or encapsulated PSCs?","correct_answer":"Encapsulated PSCs, 95% versus 80% for unencapsulated PSCs"}
+{"doc_name":"s40820-021-00672-w.pdf","query":"Which perovskite cell had the larger bandgap in the triple-junction device, the 1.99-eV front cell or the 1.60-eV middle cell?","correct_answer":"The 1.99-eV front cell"}
+{"doc_name":"s40820-021-00672-w.pdf","query":"What efficiency did PSCs reach after co-doping FAPbI3 with Cs and MDA cations and relaxing strain by over 70%?","correct_answer":"24.4%"}
+{"doc_name":"s40820-021-00672-w.pdf","query":"What certified power conversion efficiency did FAPbI3 PSCs with 2% formate anion treatment achieve?","correct_answer":"25.6% (certified 25.2%)"}
+{"doc_name":"s40820-021-00672-w.pdf","query":"What certified efficiency was achieved by inverted PSCs using the oleylamine ligand-anchoring strategy?","correct_answer":"22.3%"}
+{"doc_name":"s40820-021-00672-w.pdf","query":"What power conversion efficiency did the 1.05-cm^2 all-perovskite tandem achieve after FSA treatment?","correct_answer":"24.7%"}
+{"doc_name":"s40820-021-00672-w.pdf","query":"What efficiency did the 36 cm^2 solar module achieve when the BJ-GO layer was used with an undoped hole transport layer?","correct_answer":"16.21%"}
+{"doc_name":"s40820-023-01140-3.pdf","query":"What is the theoretical power conversion efficiency limit for perovskite solar cells with a 1.53 eV bandgap?","correct_answer":"31.34%"}
+{"doc_name":"s40820-023-01140-3.pdf","query":"What is the current champion power conversion efficiency of perovskite solar cells?","correct_answer":"26.0%"}
+{"doc_name":"s40820-023-01140-3.pdf","query":"What was the power conversion efficiency of the first MAPbI3-based solar cell reported in 2009?","correct_answer":"3.8%"}
+{"doc_name":"s40820-023-01140-3.pdf","query":"What is the bandgap of FAPbI3?","correct_answer":"1.43 eV"}
+{"doc_name":"s40820-023-01140-3.pdf","query":"What is the bandgap of MAPbI3?","correct_answer":"1.57 eV"}
+{"doc_name":"s40820-023-01140-3.pdf","query":"What is the bandgap of cubic alpha-CsPbI3?","correct_answer":"1.73 eV"}
+{"doc_name":"s40820-023-01140-3.pdf","query":"What is the bandgap of delta-CsPbI3?","correct_answer":"2.82 eV"}
+{"doc_name":"s40820-023-01140-3.pdf","query":"What is the highest external quantum efficiency reported for green perovskite LEDs?","correct_answer":"28.9%"}
+{"doc_name":"s40820-023-01140-3.pdf","query":"At what pressure do Cs4PbBr6 nanocrystals begin to show broad emission?","correct_answer":"Above 3.0 GPa"}
+{"doc_name":"s40820-023-01140-3.pdf","query":"What is the responsivity of the MAPbCl3 single-crystal UV photodetector under 365 nm illumination?","correct_answer":"46.9 mA W^-1"}
+{"doc_name":"s40820-023-01140-3.pdf","query":"Which has the higher theoretical efficiency: perovskite solar cells or GaAs solar cells?","correct_answer":"GaAs solar cells (32.54% versus 31.34%)"}
+{"doc_name":"s40820-023-01140-3.pdf","query":"Which has the larger bandgap: MAPbI3 or FAPbI3?","correct_answer":"MAPbI3"}
+{"doc_name":"s40820-023-01140-3.pdf","query":"Which PSC configuration achieved the higher PCE: the mesoscopic structure with mp-TiO2 or the planar cell with SnO2?","correct_answer":"The mesoscopic structure with mp-TiO2 (25.6%)"}
+{"doc_name":"s40820-023-01140-3.pdf","query":"Which PeLED sample has the higher EQE: PEABr:CsPbBr3:18-crown-6:MPEG-MAA or PBABr:PEABr:CsPbBr3:LiBr?","correct_answer":"PEABr:CsPbBr3:18-crown-6:MPEG-MAA (28.1%)"}
+{"doc_name":"s40820-023-01140-3.pdf","query":"Which FAPbI3:SFB10 PeLED condition has the longer T50 lifetime: 3.2 mA cm^-2 or 10 mA cm^-2?","correct_answer":"3.2 mA cm^-2 (32,675 h extrapolated)"}
+{"doc_name":"s40820-023-01140-3.pdf","query":"What was the perovskite composition and EQE in the first room-temperature electroluminescence report from 2014?","correct_answer":"MAPbI3-xClx, 0.76%"}
+{"doc_name":"s40820-023-01140-3.pdf","query":"Which all-inorganic perovskite is described as the most extensively adopted because of its narrowest bandgap, and what is that bandgap?","correct_answer":"Alpha-CsPbI3, 1.73 eV"}
+{"doc_name":"s40820-023-01140-3.pdf","query":"Which material was used as the UV-C down-conversion layer in the photodetector array, and what UV-C range did it target?","correct_answer":"CsPbBr3 quantum dot fluorophor, 200–280 nm"}
+{"doc_name":"s40820-023-01140-3.pdf","query":"Which laser-array design achieved an integration density of 1250 laser units per millimeter, and on what substrate was it implemented?","correct_answer":"Perovskite microwires on silicon nanograting"}
+{"doc_name":"s40820-023-01140-3.pdf","query":"Which lead-free dual-phase halide perovskite memristor had an ON/OFF ratio of 10^7, and what environmental stability did it show?","correct_answer":"AgBi2I7-Cs3Bi2I9, 30 days"}
+{"doc_name":"s41377-024-01461-x.pdf","query":"What PCE do certified single-junction perovskite solar cells currently boast?","correct_answer":"26.1%"}
+{"doc_name":"s41377-024-01461-x.pdf","query":"What was the PCE of the first fabricated perovskite solar cells?","correct_answer":"3.8%"}
+{"doc_name":"s41377-024-01461-x.pdf","query":"What is the general structural formula of 3D organic-inorganic hybrid perovskite?","correct_answer":"ABX3"}
+{"doc_name":"s41377-024-01461-x.pdf","query":"Which ions can occupy the A site in the perovskite ABX3 structure?","correct_answer":"MA+, FA+, or an alkali metal ion"}
+{"doc_name":"s41377-024-01461-x.pdf","query":"Which ions can occupy the B site in the perovskite ABX3 structure?","correct_answer":"Pb2+ or Sn2+"}
+{"doc_name":"s41377-024-01461-x.pdf","query":"What band offset is considered imperative for effective charge extraction at the ETL/perovskite or HTL/perovskite interface?","correct_answer":"Approximately 0.2 eV"}
+{"doc_name":"s41377-024-01461-x.pdf","query":"What certified efficiency has perovskite/silicon tandem solar cells surpassed?","correct_answer":"33.7%"}
+{"doc_name":"s41377-024-01461-x.pdf","query":"What maximum PCE has all-perovskite tandem solar cells reached?","correct_answer":"28.5%"}
+{"doc_name":"s41377-024-01461-x.pdf","query":"What PCE has indoor Cs0.17FA0.83PbIxBr3-x photovoltaics achieved?","correct_answer":"36.36%"}
+{"doc_name":"s41377-024-01461-x.pdf","query":"What is the highest lab PCE reported for blade-coated perovskite solar cells?","correct_answer":"24.31%"}
+{"doc_name":"s41377-024-01461-x.pdf","query":"Which perovskite has better intrinsic thermal stability: CsPbI3 or MAPbI3?","correct_answer":"CsPbI3"}
+{"doc_name":"s41377-024-01461-x.pdf","query":"Which solvent has the highest DALY in the solvent toxicity assessment, DMF or DMSO?","correct_answer":"DMF"}
+{"doc_name":"s41377-024-01461-x.pdf","query":"Which additive gave the highest VOC among BCA, BDCA, and BTCA?","correct_answer":"BTCA, with VOC up to 1.076 V"}
+{"doc_name":"s41377-024-01461-x.pdf","query":"Which fabrication method had the lower scaling-up factor, inject printing or screen printing?","correct_answer":"Inject printing"}
+{"doc_name":"s41377-024-01461-x.pdf","query":"Which device retained more peak performance after thermal stress at 50 °C for 120 h, the control device or the DDT-treated device?","correct_answer":"The DDT-treated device"}
+{"doc_name":"s41377-024-01461-x.pdf","query":"Which covalent-bonding additive enabled PSCs to retain 98.6% of their initial efficiency after 1000 h of operational testing?","correct_answer":"Bis-diazirine (BD) molecules"}
+{"doc_name":"s41377-024-01461-x.pdf","query":"Which encapsulation material reduced lead leakage by a factor of 375 after hail impact and acid rain tests?","correct_answer":"Epoxy resin-based polymer (ER) encapsulation"}
+{"doc_name":"s41377-024-01461-x.pdf","query":"Which green solvent system produced a certified 20.23% efficiency for a 12.25 cm² FAPbI3 micro-module?","correct_answer":"GVL and n-butyl acetate"}
+{"doc_name":"s41377-024-01461-x.pdf","query":"Which lead-capture composite achieved 99.97% recycling yield by adsorbing Pb2+ from DMF-dissolved end-of-life devices?","correct_answer":"Fe-decorated hydroxyapatite (HAP/Fe) hollow composite"}
+{"doc_name":"s41377-024-01461-x.pdf","query":"What bandgap was optimized in the PSC/CIGS tandem to match CIGS, and what PCE did the tandem achieve?","correct_answer":"1.67 eV and 28.4%"}
+{"doc_name":"s41467-018-05454-4.pdf","query":"What mol% of 2D phenylethylammonium lead iodide was optimal for photovoltaic performance?","correct_answer":"1.67 mol%"}
+{"doc_name":"s41467-018-05454-4.pdf","query":"What was the stabilized power conversion efficiency achieved by the target device?","correct_answer":"20.64%"}
+{"doc_name":"s41467-018-05454-4.pdf","query":"What certified stabilized power conversion efficiency was reported for the target device?","correct_answer":"19.77%"}
+{"doc_name":"s41467-018-05454-4.pdf","query":"What peak open-circuit voltage was achieved by the target device?","correct_answer":"1.130 V"}
+{"doc_name":"s41467-018-05454-4.pdf","query":"What loss-in-potential corresponded to the peak open-circuit voltage?","correct_answer":"0.35 V"}
+{"doc_name":"s41467-018-05454-4.pdf","query":"What was the average photoluminescence lifetime after adding 1.67 mol% 2D perovskite?","correct_answer":"376.9 ns"}
+{"doc_name":"s41467-018-05454-4.pdf","query":"What was the average power conversion efficiency of the bare FAPbI3 devices?","correct_answer":"15.95 ± 0.36%"}
+{"doc_name":"s41467-018-05454-4.pdf","query":"What activation energy was calculated for ion migration in bare FAPbI3?","correct_answer":"0.16 eV"}
+{"doc_name":"s41467-018-05454-4.pdf","query":"What was the T80 lifetime of the target device?","correct_answer":"1362 h"}
+{"doc_name":"s41467-018-05454-4.pdf","query":"What inter-planar distance at the grain boundary corresponded to 2D PEA2PbI4?","correct_answer":"8.0 Å"}
+{"doc_name":"s41467-018-05454-4.pdf","query":"Which material has the lower bandgap, FAPbI3 or MAPbI3?","correct_answer":"FAPbI3"}
+{"doc_name":"s41467-018-05454-4.pdf","query":"Which 2D perovskite loading caused the photoluminescence peak to blue-shift by 6 nm and the device PCE to drop below 1%?","correct_answer":"10 mol% PEA2PbI4"}
+{"doc_name":"s41467-018-05454-4.pdf","query":"Under 80 ± 5% relative humidity, which film bleached within 24 h?","correct_answer":"Bare FAPbI3"}
+{"doc_name":"s41467-018-05454-4.pdf","query":"Which device retained a higher fraction of its initial PCE after 500 h of open-circuit light exposure?","correct_answer":"Target device"}
+{"doc_name":"s41467-018-05454-4.pdf","query":"Which device showed no hysteresis behavior in the current-voltage curve at 180 K?","correct_answer":"The device with 1.67 mol% 2D PEA2PbI4"}
+{"doc_name":"s41467-018-05454-4.pdf","query":"Which device had the higher electroluminescence external quantum efficiency?","correct_answer":"Target device"}
+{"doc_name":"s41467-018-05454-4.pdf","query":"What stabilized PCE did the device with a peak open-circuit voltage of 1.130 V achieve?","correct_answer":"20.64%"}
+{"doc_name":"s41467-018-05454-4.pdf","query":"What short-circuit current density did the device with certified stabilized PCE of 19.77% have?","correct_answer":"24.44 mA cm^-2"}
+{"doc_name":"s41467-018-05454-4.pdf","query":"What annealing condition was used for the best performing target device?","correct_answer":"80°C for 1 min followed by 150°C for 20 min"}
+{"doc_name":"s41467-018-05454-4.pdf","query":"What activation energy was measured for the bare film that showed exponential conductivity enhancement near 130 K?","correct_answer":"0.16 eV"}
+{"doc_name":"s41467-018-07255-1.pdf","query":"What certified power conversion efficiency had perovskite solar cells reached within a few years?","correct_answer":"23.3%"}
+{"doc_name":"s41467-018-07255-1.pdf","query":"What is the longest lifetime reported for perovskite solar cells?","correct_answer":"about one year"}
+{"doc_name":"s41467-018-07255-1.pdf","query":"What module efficiency for silicon PV?","correct_answer":"21%"}
+{"doc_name":"s41467-018-07255-1.pdf","query":"What cost for silicon PV?","correct_answer":"0.3 $ W−1"}
+{"doc_name":"s41467-018-07255-1.pdf","query":"What standard test temperature is suggested for perovskite solar cell stability tests?","correct_answer":"25 °C"}
+{"doc_name":"s41467-018-07255-1.pdf","query":"What hole transport layer is said to need replacement because of its hygroscopicity and vulnerability to moisture and heat?","correct_answer":"Spiro-OMeTAD"}
+{"doc_name":"s41467-018-07255-1.pdf","query":"What is the best lifetime obtained for perovskite solar cells?","correct_answer":"10,000 h"}
+{"doc_name":"s41467-018-07255-1.pdf","query":"What target lifetime under 85 °C and 85% relative humidity is proposed as a goal?","correct_answer":"1000 h lifetime with 80% retention of initial efficiency"}
+{"doc_name":"s41467-018-07255-1.pdf","query":"What levelized cost of energy threshold is suggested for perovskite PV to be competitive with c-Si PV?","correct_answer":"5.50 US cents kWh−1"}
+{"doc_name":"s41467-018-07255-1.pdf","query":"What discount rate is assumed in the LCOE calculation?","correct_answer":"5% per year"}
+{"doc_name":"s41467-018-07255-1.pdf","query":"Which has the higher champion efficiency: silicon solar cells or perovskite solar cells?","correct_answer":"Silicon solar cells, with 26.6% versus 23.3% for perovskite solar cells"}
+{"doc_name":"s41467-018-07255-1.pdf","query":"Which has the longer lifetime: silicon PV or perovskite PV?","correct_answer":"Silicon PV, with more than 25 years versus about 1 year for perovskite PV"}
+{"doc_name":"s41467-018-07255-1.pdf","query":"Which can be solved by encapsulation: moisture or ion migration?","correct_answer":"Moisture"}
+{"doc_name":"s41467-018-07255-1.pdf","query":"Which approach is used to address thermal instability: composition tuning or A-site alkali doping?","correct_answer":"Composition tuning"}
+{"doc_name":"s41467-018-07255-1.pdf","query":"At an efficiency threshold of 20%, which is higher: the best light-soaking stability or the best overall lifetime reported for perovskite solar cells?","correct_answer":"The best overall lifetime reported for perovskite solar cells, at 10,000 h"}
+{"doc_name":"s41467-018-07255-1.pdf","query":"What module efficiency and module lifetime are assumed in the LCOE calculation?","correct_answer":"19% module efficiency and 20 years"}
+{"doc_name":"s41467-018-07255-1.pdf","query":"What major materials usage ratio is assumed in the LCOE calculation?","correct_answer":"80%"}
+{"doc_name":"s41467-018-07255-1.pdf","query":"If perovskite PV has a PCE of 19% and a module size of at least 100 cm², what lifetime threshold is suggested?","correct_answer":"15 years"}
+{"doc_name":"s41467-018-07255-1.pdf","query":"What standard test conditions are suggested for perovskite solar cells?","correct_answer":"25 °C, encapsulated or inert gas protected device, maximum power point tracing, and AM 1.5 light soaking"}
+{"doc_name":"s41467-018-07255-1.pdf","query":"What are the champion efficiency and small-module efficiency of perovskite solar cells?","correct_answer":"23.3% champion efficiency and 17% for the small module"}
+{"doc_name":"What_Defines_a_Perovskite.pdf","query":"What is the chemical formula of the mineral perovskite?","correct_answer":"CaTiO3"}
+{"doc_name":"What_Defines_a_Perovskite.pdf","query":"What stoichiometry should a material have to be called a perovskite?","correct_answer":"ABX3"}
+{"doc_name":"What_Defines_a_Perovskite.pdf","query":"What A:B:X ratio is given as acceptable for materials with a clear relation to the perovskite structure?","correct_answer":"1:1:3"}
+{"doc_name":"What_Defines_a_Perovskite.pdf","query":"What coordination should the B-cation have in a perovskite?","correct_answer":"Octahedral coordination"}
+{"doc_name":"What_Defines_a_Perovskite.pdf","query":"How should the [BX6] octahedra be organized in a perovskite?","correct_answer":"An all-corner sharing 3D network"}
+{"doc_name":"What_Defines_a_Perovskite.pdf","query":"What structure does CaTiO3 adopt at ambient conditions?","correct_answer":"An orthorhombic structure"}
+{"doc_name":"What_Defines_a_Perovskite.pdf","query":"What is the closest inter-octahedral I–I distance in Cs2SnI6?","correct_answer":"4.18 Å"}
+{"doc_name":"What_Defines_a_Perovskite.pdf","query":"What is the general formula of the elpasolite-type compounds discussed?","correct_answer":"A2BB'X6"}
+{"doc_name":"What_Defines_a_Perovskite.pdf","query":"Which phases are said to contain perovskite layers?","correct_answer":"Ruddlesden-Popper phases"}
+{"doc_name":"What_Defines_a_Perovskite.pdf","query":"Which is longer: the closest I–I distance in Cs2SnI6 or twice the van der Waals radius of iodine?","correct_answer":"The closest I–I distance in Cs2SnI6"}
+{"doc_name":"What_Defines_a_Perovskite.pdf","query":"Which structure type can be understood as double perovskites: A2BB'X6 elpasolite-type compounds or K2PtCl6-type compounds?","correct_answer":"A2BB'X6 elpasolite-type compounds"}
+{"doc_name":"What_Defines_a_Perovskite.pdf","query":"Which phases are lower in symmetry: low-temperature phases or high-temperature phases?","correct_answer":"Low-temperature phases"}
+{"doc_name":"What_Defines_a_Perovskite.pdf","query":"Which is not regarded as a perovskite: Cs2SnI6 or compounds with a 3D corner-sharing octahedral network?","correct_answer":"Cs2SnI6"}
+{"doc_name":"semitransparent-perovskite-solar-cells.pdf","query":"What power conversion efficiency have perovskite solar cells achieved in recent years?","correct_answer":"greater than 25%"}
+{"doc_name":"semitransparent-perovskite-solar-cells.pdf","query":"What is the general chemical formula of the perovskite absorber used in these solar cells?","correct_answer":"ABX3"}
+{"doc_name":"semitransparent-perovskite-solar-cells.pdf","query":"In 2018, what share of total U.S. energy consumption came from the residential and commercial sectors?","correct_answer":"about 40% (about 40 quadrillion BTU)"}
+{"doc_name":"semitransparent-perovskite-solar-cells.pdf","query":"In 2018, what share of total U.S. energy consumption came from renewable energy sources?","correct_answer":"about 11%"}
+{"doc_name":"semitransparent-perovskite-solar-cells.pdf","query":"For a 300 nm MAPb(I3-xBrx)3 film, what average visible transparency is reported when x = 1.5?","correct_answer":"24%"}
+{"doc_name":"semitransparent-perovskite-solar-cells.pdf","query":"What perovskite film thickness is required to achieve maximum absorbance?","correct_answer":"400 nm"}
+{"doc_name":"semitransparent-perovskite-solar-cells.pdf","query":"What power conversion efficiency was reported for semitransparent CsPbBr3 solar cells made by dual-source vacuum coevaporation?","correct_answer":"5.98%"}
+{"doc_name":"semitransparent-perovskite-solar-cells.pdf","query":"What average visible transparency was achieved for the uniform 110 nm perovskite film formed using thiourea-vapor passivation of PEDOT:PSS?","correct_answer":"34%"}
+{"doc_name":"semitransparent-perovskite-solar-cells.pdf","query":"What solvent ratio gave the best balance of morphology, crystal size, defects, and semitransparency for the low-dimensional perovskite films?","correct_answer":"DMF:DMSO = 8:2"}
+{"doc_name":"semitransparent-perovskite-solar-cells.pdf","query":"What power conversion efficiency was achieved by the best semitransparent cell made with the SiO2 honeycomb scaffold method?","correct_answer":"10.3%"}
+{"doc_name":"semitransparent-perovskite-solar-cells.pdf","query":"For MAPb(I3-xBrx)3 films of the same 300 nm thickness, which bromide content gives higher average visible transparency: x = 0 or x = 1.5?","correct_answer":"x = 1.5 gives higher AVT (24% vs 10%)"}
+{"doc_name":"semitransparent-perovskite-solar-cells.pdf","query":"In dual-source vacuum coevaporation of CsPbBr3, which evaporation condition yields larger grains: faster or slower evaporation?","correct_answer":"slower evaporation"}
+{"doc_name":"semitransparent-perovskite-solar-cells.pdf","query":"In self-assembled perovskite grid films, how does transmittance change when the perovskite solution concentration increases?","correct_answer":"it decreases"}
+{"doc_name":"semitransparent-perovskite-solar-cells.pdf","query":"Which microstructured island perovskite showed higher solar-cell performance and smaller hysteresis: FA-based or MA-based?","correct_answer":"FA-based perovskite"}
+{"doc_name":"semitransparent-perovskite-solar-cells.pdf","query":"How did the short-circuit current density compare when polystyrene passivation was used versus not used in island-morphology semitransparent cells?","correct_answer":"it increased to 15.5 mA/cm2 from 12.3 mA/cm2"}
+{"doc_name":"semitransparent-perovskite-solar-cells.pdf","query":"What transparent back contact was used to make the optimized 0.2 M PbI2 grid cell fully semitransparent, and what performance did that complete device deliver?","correct_answer":"MoO3/Au/MoO3 DMD; 5.5% PCE with over 20% transmittance"}
+{"doc_name":"semitransparent-perovskite-solar-cells.pdf","query":"After hot FAI post-treatment of the mixed-cation perovskite grid, how did the average visible transparency and power conversion efficiency change relative to the untreated device?","correct_answer":"AVT decreased from 36% to 28%, while PCE increased from 8% to 10%"}
+{"doc_name":"semitransparent-perovskite-solar-cells.pdf","query":"In the 4-terminal all-perovskite tandem, what were the band gaps of the top and bottom cells, and what total power conversion efficiency was obtained?","correct_answer":"1.75 eV top cell, 1.25 eV bottom cell, 23.1% PCE"}
+{"doc_name":"semitransparent-perovskite-solar-cells.pdf","query":"In the 2-terminal all-perovskite tandem built from the same top and bottom perovskites, what interconnecting layer was used and what power conversion efficiency was reported?","correct_answer":"Ag/MoO3/ITO; 21%"}
+{"doc_name":"semitransparent-perovskite-solar-cells.pdf","query":"For wide-bandgap perovskite/silicon tandem cells, what was the effect of Al2O3 surface passivation on open-circuit voltage, and what efficiency was achieved for the passivated CsFAPbIBr-Si 4T tandem?","correct_answer":"it increased Voc by reducing nonradiative recombination at the perovskite/HTL interface; 27.1% PCE"}
+{"doc_name":"What_Defines_a_Perovskite.pdf","query":"Which is required for calling a material a perovskite: isolated metal-halide tetrahedra or octahedral B-cation coordination?","correct_answer":"Octahedral B-cation coordination"}
+{"doc_name":"What_Defines_a_Perovskite.pdf","query":"Why is Cs2SnI6 not expected to have bonding between its octahedra?","correct_answer":"Its closest I–I distance is 4.18 Å, which is longer than 3.96 Å"}
+{"doc_name":"What_Defines_a_Perovskite.pdf","query":"What structural relationship explains why CaTiO3 is not cubic at ambient conditions?","correct_answer":"It is an orthorhombic hettotype derived from the cubic aristotype by a group-subgroup relationship"}
+{"doc_name":"What_Defines_a_Perovskite.pdf","query":"Why are Ruddlesden-Popper compounds not called layered perovskites?","correct_answer":"Because they contain perovskite layers, and perovskite layers are not layered perovskites"}
+{"doc_name":"What_Defines_a_Perovskite.pdf","query":"Why can A2BB'X6 elpasolite-type compounds be understood as double perovskites?","correct_answer":"Because the corner-sharing network of octahedra is still in place"}
+{"doc_name":"What_Defines_a_Perovskite.pdf","query":"What term may be useful because halide anions are a common feature in this family of compounds?","correct_answer":"Halide semiconductor"}
+{"doc_name":"understanding-degradation-mechanisms-and-improving-stability-of-perovskite-photovoltaics.pdf","query":"At what relative humidity did unpackaged perovskite solar cells begin to degrade within a few hundred hours of air exposure?","correct_answer":"Higher than 50% RH"}
+{"doc_name":"understanding-degradation-mechanisms-and-improving-stability-of-perovskite-photovoltaics.pdf","query":"What bromide fraction in MAPb(I1−xBrx)3 gave better performance and improved dark storage stability?","correct_answer":"20–29% Br"}
+{"doc_name":"understanding-degradation-mechanisms-and-improving-stability-of-perovskite-photovoltaics.pdf","query":"What value of n gave 15.3% PCE in the 2D-incorporated 3D perovskite structure?","correct_answer":"n = 60"}
+{"doc_name":"understanding-degradation-mechanisms-and-improving-stability-of-perovskite-photovoltaics.pdf","query":"What average grain size corresponded to only 15% degradation after 7 h in 85% RH air?","correct_answer":"678 nm"}
+{"doc_name":"understanding-degradation-mechanisms-and-improving-stability-of-perovskite-photovoltaics.pdf","query":"How much performance did TEOS-containing solar cells retain after 1200 h under 1 sun in ambient atmosphere?","correct_answer":"85%"}
+{"doc_name":"understanding-degradation-mechanisms-and-improving-stability-of-perovskite-photovoltaics.pdf","query":"What reverse-bias breakdown voltage range is reported for perovskite solar cells?","correct_answer":"−1 V to −4 V"}
+{"doc_name":"understanding-degradation-mechanisms-and-improving-stability-of-perovskite-photovoltaics.pdf","query":"At approximately what temperature does MAPbI3 transition to the cubic phase?","correct_answer":"About 55 °C"}
+{"doc_name":"understanding-degradation-mechanisms-and-improving-stability-of-perovskite-photovoltaics.pdf","query":"What power conversion efficiency did the quadruple-cation FA0.75MA0.15Cs0.05Rb0.05Pb(I0.83Br0.17)3 perovskite achieve?","correct_answer":"21.6%"}
+{"doc_name":"understanding-degradation-mechanisms-and-improving-stability-of-perovskite-photovoltaics.pdf","query":"Which grain size degraded less after 7 h in 85% RH air: 678 nm or 297 nm?","correct_answer":"678 nm"}
+{"doc_name":"understanding-degradation-mechanisms-and-improving-stability-of-perovskite-photovoltaics.pdf","query":"Which electrode family enabled no change in performance for unencapsulated cells after 1 year or 1000 h: carbon or metal?","correct_answer":"Carbon electrodes"}
+{"doc_name":"understanding-degradation-mechanisms-and-improving-stability-of-perovskite-photovoltaics.pdf","query":"Which electron transport layer enabled 1000 h of operation under full-spectrum irradiation: SnO2 or TiO2?","correct_answer":"SnO2"}
+{"doc_name":"understanding-degradation-mechanisms-and-improving-stability-of-perovskite-photovoltaics.pdf","query":"Which is more structurally stable at room temperature, MAPbI3 or FAPbI3?","correct_answer":"MAPbI3"}
+{"doc_name":"understanding-degradation-mechanisms-and-improving-stability-of-perovskite-photovoltaics.pdf","query":"Which encapsulant was stiffer and led to delamination: Surlyn or EVA/polyolefin?","correct_answer":"Surlyn"}
+{"doc_name":"understanding-degradation-mechanisms-and-improving-stability-of-perovskite-photovoltaics.pdf","query":"What package configuration allowed perovskite solar cells to pass both the 200 thermal-cycle test and the 1000 h damp-heat test?","correct_answer":"A glass-glass package with a compliable EVA or polyolefin encapsulant and a butyl rubber edge seal"}
+{"doc_name":"understanding-degradation-mechanisms-and-improving-stability-of-perovskite-photovoltaics.pdf","query":"Which electron selective layer and hole transport material were used in the unencapsulated cells that achieved over 1000 h operational stability?","correct_answer":"SnO2 electron selective layers and a novel hydrophobic hole transport material"}
+{"doc_name":"understanding-degradation-mechanisms-and-improving-stability-of-perovskite-photovoltaics.pdf","query":"In the triple-cation perovskite cell illuminated for 25 h, which cation migrated from the bulk to the hole transporter?","correct_answer":"Cs+"}
+{"doc_name":"understanding-degradation-mechanisms-and-improving-stability-of-perovskite-photovoltaics.pdf","query":"Which dopant suppresses vacancy formation and increases ambient-air stability by an order of magnitude?","correct_answer":"Cadmium"}
+{"doc_name":"understanding-degradation-mechanisms-and-improving-stability-of-perovskite-photovoltaics.pdf","query":"What type of bottom cell enabled 19% efficient perovskite-perovskite tandem solar cells to retain full performance after 150 h at 85 °C in air?","correct_answer":"A tin-containing bottom cell"}

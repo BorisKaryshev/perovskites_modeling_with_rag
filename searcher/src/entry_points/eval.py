@@ -58,6 +58,8 @@ class EvalEntryPoint(AddDocumentEntryPoint):
         self._dataset_file_path = args.dataset_file
         self._output_path = args.output
         self._files_to_add = args.files_to_add
+        self._skip_check = args.skip_check
+        self._comment = args.comment
 
         if not self._output_path:
             self._output_path = DEFAULT_REPORTS_PATH
@@ -66,12 +68,13 @@ class EvalEntryPoint(AddDocumentEntryPoint):
         self._not_compress = args.not_compress
 
         self._printer = ReportGenerator(
-            skip_check=args.skip_check,
+            skip_check=self._skip_check,
             knowledge_base_files_paths=self._files_to_add,
             eval_dataset_path=self._dataset_file_path,
             output_path=self._output_path / FILENAMES["report"],
             config_path=args.config,
             base_path=Path("../.."),
+            comment=self._comment,
         )
 
         self._retrieval_metrics = [
@@ -121,6 +124,7 @@ class EvalEntryPoint(AddDocumentEntryPoint):
         AddDocumentEntryPoint.add_subparser(parser)
 
         parser.add_argument("-s", "--skip_check", action="store_true", default=False)
+        parser.add_argument("-m", "--comment", type=str, default="")
         parser.add_argument("-o", "--output", type=Path, required=False, default=None)
         parser.add_argument(
             "-f",
@@ -203,6 +207,8 @@ class EvalEntryPoint(AddDocumentEntryPoint):
         return result
 
     def _commit(self):
+        if self._skip_check:
+            return
         repo = git.Repo(__file__, search_parent_directories=True)
 
         repo.index.add(self._output_path)

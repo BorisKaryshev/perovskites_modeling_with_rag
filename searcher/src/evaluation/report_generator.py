@@ -55,11 +55,13 @@ class ReportGenerator:
         config_path: Optional[Path] = None,
         knowledge_base_files_paths: List[Path] = [],
         base_path: Optional[Path] = None,
+        comment: str = "",
     ):
         self._knowledge_base_files_paths = deepcopy(knowledge_base_files_paths)
         self._eval_dataset_path = eval_dataset_path
         self._config_path = config_path
         self._base_path = base_path
+        self._comment = comment
 
         self._is_all_files_tracked_by_git = not Repo(
             __file__, search_parent_directories=True
@@ -167,6 +169,7 @@ class ReportGenerator:
                 _create_markdown_link(p, self._base_path)
                 for p in self._knowledge_base_files_paths
             ],
+            "comment": self._comment,
         }
 
         result["common"]["eval_dataset_path"] = _create_markdown_link(
@@ -244,6 +247,7 @@ class ReportGenerator:
         self._print("# Common information")
         curr_datetime = stats_dict["common"]["timestamp"]
         self._print(f"Report was generated: {curr_datetime}")
+        self._print(f"Comment: {stats_dict['common']['comment']}")
         self._print(f"Git branch name: {stats_dict['common']['git_branch']}")
         self._print(f"Git commit: {stats_dict['common']['git_commit']}")
         self._print(

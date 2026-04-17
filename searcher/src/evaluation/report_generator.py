@@ -218,6 +218,9 @@ class ReportGenerator:
                 ),
                 "avg relevant position": avg_relevant_all,
                 "avg first relevant position": avg_relevant_first,
+                "avg n of relevan chunks": np.mean(
+                    [np.sum(i) for i in self._retrieval_is_relevant]
+                ),
                 "mrr@1": mrr_at_k_from_ordered_relevance(is_relevant_matrix, 1),
                 "mrr@2": mrr_at_k_from_ordered_relevance(is_relevant_matrix, 2),
                 "mrr@3": mrr_at_k_from_ordered_relevance(is_relevant_matrix, 3),

@@ -2,7 +2,7 @@
 
 Report was generated: 2026-04-17 19:41:33 +00:00
 
-Comment: 
+Comment: EXP-001 simple rag with embeddings search only
 
 Git branch name: master
 
@@ -71,6 +71,7 @@ Path of config of experiment: [docs/EXP_001_is_retrieval_needed_eval/config_embe
 | avg n of chunks             |   10.00 |
 | avg relevant position       |    4.51 |
 | avg first relevant position |    2.92 |
+| avg n of relevan chunks     |    1.63 |
 | mrr@1                       |    0.34 |
 | mrr@2                       |    0.40 |
 | mrr@3                       |    0.43 |
@@ -123,4 +124,3 @@ Path of config of experiment: [docs/EXP_001_is_retrieval_needed_eval/config_embe
 | p95            |    8227.00 |
 | p99            |   11640.70 |
 | max            |   17599.00 |
-

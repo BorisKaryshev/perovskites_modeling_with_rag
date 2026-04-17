@@ -65,6 +65,7 @@ Path of config of experiment: [docs/EXP_001_is_retrieval_needed_eval/config.ini]
 | avg n of chunks             |   10.00 |
 | avg relevant position       |    3.89 |
 | avg first relevant position |    1.71 |
+| avg n of relevan chunks     |    2.17 |
 | mrr@1                       |    0.59 |
 | mrr@2                       |    0.68 |
 | mrr@3                       |    0.71 |
@@ -117,4 +118,3 @@ Path of config of experiment: [docs/EXP_001_is_retrieval_needed_eval/config.ini]
 | p95            |    7727.40 |
 | p99            |    9071.45 |
 | max            |   11725.00 |
-

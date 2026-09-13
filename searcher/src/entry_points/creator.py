@@ -11,6 +11,7 @@ from .eval import EvalEntryPoint
 from .eval_stats import EvalStatsEntryPoint
 from .test import TestEntryPoint
 from .rag import RagEntryPoint
+from .simple_agent import SimpleAgentWorking
 
 from argparse import ArgumentParser, Namespace
 
@@ -26,6 +27,7 @@ class EnteryPointInstances(InstanceTypeEnum):
     TEST = ("test", TestEntryPoint)
     EVAL_STATS_PRINTER = ("eval_stats", EvalStatsEntryPoint)
     RAG_ENTRY_POINT = ("simple_rag", RagEntryPoint)
+    SIMPLE_AGENT_ENTRY = ("simple_agent", SimpleAgentWorking)
 
 
 def parse_arguments() -> Namespace:

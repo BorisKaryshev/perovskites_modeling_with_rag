@@ -4,6 +4,7 @@ from .interface import (
     ChatStreamResponseType,
     ChatVerboseResponse,
     EmbedderProvider,
+    ToolCall,
 )
 
 import aiohttp
@@ -64,6 +65,8 @@ class OpenAIChatProvider(ChatProvider):
             "temperature": self._temperature,
             "max_completion_tokens": self._max_compeletion_tokens,
         }
+        if self._tools:
+            payload["tools"] = [i._tool_schema for i in self._tools.values()]
         if self._json_schema:
             payload["type"] = "json_schema"
             payload["schema"] = self._json_schema
@@ -101,6 +104,24 @@ class OpenAIChatProvider(ChatProvider):
                             content_type=ChatStreamResponseType.THINKING,
                         )
 
+                    tool_calls = data["choices"][0]["delta"].get("tool_calls")
+
+                    tools = []
+                    if tool_calls:
+                        for i in tool_calls:
+                            i = i["function"]
+                            tools.append(
+                                ToolCall(
+                                    name=i["name"],
+                                    arguments=json.loads(i["arguments"]),
+                                    func=self._tools[i["name"]],
+                                )
+                            )
+                        yield ChatStreamResponse(
+                            content_type=ChatStreamResponseType.TOOL,
+                            tool_calls=tools,
+                        )
+
                     content = data["choices"][0]["delta"].get("content")
                     if not content:
                         continue
@@ -124,6 +145,8 @@ class OpenAIChatProvider(ChatProvider):
             "messages": messages,
             "temperature": self._temperature,
         }
+        if self._tools:
+            payload["tools"] = [i._tool_schema for i in self._tools.values()]
         if self._json_schema:
             payload["type"] = "json_schema"
             payload["json_schema"] = self._json_schema
@@ -141,12 +164,27 @@ class OpenAIChatProvider(ChatProvider):
                 output = await response.json()
                 logger.info(f"Got response from llm: {output}")
 
+                tool_calls = output["choices"][0]["message"].get("tool_calls")
+
+                tools = []
+                if tool_calls:
+                    for i in tool_calls:
+                        i = i["function"]
+                        tools.append(
+                            ToolCall(
+                                name=i["name"],
+                                arguments=json.loads(i["arguments"]),
+                                func=self._tools[i["name"]],
+                            )
+                        )
+
                 return ChatVerboseResponse(
                     response=output["choices"][0]["message"]["content"],
+                    thinking=output["choices"][0]["message"].get("reasoning", ""),
                     prompt_tokens=output["usage"]["prompt_tokens"],
                     completion_tokens=output["usage"]["completion_tokens"],
                     total_tokens=output["usage"]["total_tokens"],
-                    thinking="",
+                    tool_calls=tools,
                 )
 
 

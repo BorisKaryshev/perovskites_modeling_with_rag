@@ -2,8 +2,6 @@ import json
 import unittest
 from unittest.mock import patch
 
-from pydantic import ValidationError
-
 from src.tools.perovskite_database import (
     MODEL_VERSION,
     PEROVSKITE_SEARCH_FIELDS,
@@ -87,7 +85,7 @@ class PerovskiteDatabaseToolTests(unittest.TestCase):
                 }
             ]
         }
-        with self.assertRaises(ValidationError):
+        with self.assertRaisesRegex(ValueError, "Photovoltaic metrics"):
             add_perovskite_structure(document)
 
     def test_add_tool_accepts_native_document_object(self):
@@ -95,6 +93,22 @@ class PerovskiteDatabaseToolTests(unittest.TestCase):
         self.assertEqual(parameters["required"], ["document"])
         self.assertEqual(parameters["properties"]["document"]["type"], "object")
         self.assertNotIn("document_json", parameters["properties"])
+        self.assertIn("Perovskite", parameters["$defs"])
+        self.assertNotIn("$defs", parameters["properties"]["document"])
+        self.assertEqual(
+            parameters["properties"]["document"]["properties"]["perovskites"]
+            ["items"]["$ref"],
+            "#/$defs/Perovskite",
+        )
+
+    def test_add_validation_error_explains_required_ion_shape(self):
+        with self.assertRaisesRegex(ValueError, "ions.*array"):
+            add_perovskite_structure({
+                "perovskites": [{
+                    "id": "bad", "formula": "CsPbI3", "ions": "CsPbI3"
+                }],
+                "layer_stacks": [],
+            })
 
     def test_filter_parser_accepts_fields_and_rejects_unknown_ones(self):
         self.assertEqual(

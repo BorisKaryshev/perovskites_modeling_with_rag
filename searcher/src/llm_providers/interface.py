@@ -23,6 +23,7 @@ class ToolCall:
     name: str
     func: Callable
     arguments: dict
+    call_id: str = ""
 
 
 @dataclass

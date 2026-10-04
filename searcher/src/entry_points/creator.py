@@ -12,6 +12,8 @@ from .eval_stats import EvalStatsEntryPoint
 from .test import TestEntryPoint
 from .rag import RagEntryPoint
 from .simple_agent import SimpleAgentWorking
+from .paper_to_perovskite import PaperToPerovskiteEntryPoint
+from .best_perovskite import BestPerovskiteEntryPoint
 
 from argparse import ArgumentParser, Namespace
 
@@ -28,6 +30,8 @@ class EnteryPointInstances(InstanceTypeEnum):
     EVAL_STATS_PRINTER = ("eval_stats", EvalStatsEntryPoint)
     RAG_ENTRY_POINT = ("simple_rag", RagEntryPoint)
     SIMPLE_AGENT_ENTRY = ("simple_agent", SimpleAgentWorking)
+    PAPER_TO_PEROVSKITE = ("paper_to_perovskite", PaperToPerovskiteEntryPoint)
+    BEST_PEROVSKITE = ("best_perovskite", BestPerovskiteEntryPoint)
 
 
 def parse_arguments() -> Namespace:

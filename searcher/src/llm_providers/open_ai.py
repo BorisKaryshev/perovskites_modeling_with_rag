@@ -108,13 +108,15 @@ class OpenAIChatProvider(ChatProvider):
 
                     tools = []
                     if tool_calls:
-                        for i in tool_calls:
-                            i = i["function"]
+                        for tool_call in tool_calls:
+                            call_id = tool_call.get("id", "")
+                            i = tool_call["function"]
                             tools.append(
                                 ToolCall(
                                     name=i["name"],
                                     arguments=json.loads(i["arguments"]),
                                     func=self._tools[i["name"]],
+                                    call_id=call_id,
                                 )
                             )
                         yield ChatStreamResponse(
@@ -144,6 +146,7 @@ class OpenAIChatProvider(ChatProvider):
             "model": self._model,
             "messages": messages,
             "temperature": self._temperature,
+            "max_completion_tokens": self._max_compeletion_tokens,
         }
         if self._tools:
             payload["tools"] = [i._tool_schema for i in self._tools.values()]
@@ -168,13 +171,15 @@ class OpenAIChatProvider(ChatProvider):
 
                 tools = []
                 if tool_calls:
-                    for i in tool_calls:
-                        i = i["function"]
+                    for tool_call in tool_calls:
+                        call_id = tool_call.get("id", "")
+                        i = tool_call["function"]
                         tools.append(
                             ToolCall(
                                 name=i["name"],
                                 arguments=json.loads(i["arguments"]),
                                 func=self._tools[i["name"]],
+                                call_id=call_id,
                             )
                         )
 

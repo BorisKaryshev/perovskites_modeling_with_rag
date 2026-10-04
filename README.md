@@ -19,7 +19,7 @@ Python-инструменты `add_perovskite_structure`, `delete_perovskite_str
 `searcher/sql/schema-v2.1.sql`. Каталог `searcher` содержит весь необходимый код;
 внешний каталог или симлинк `perovskite_structure` не требуется.
 
-Перед первым запуском выполните `searcher/sql/init.sql` через `psql` от имени
+Перед первым запуском выполните `searcher/scripts/perovskite_database_managment_postgres/init.sql` через `psql` от имени
 администратора PostgreSQL (версия 15+). Скрипт создаёт отдельную базу `perovskites`,
 пользователя `perovskites` с паролем `perovskites` и таблицы модели 2.1.
 Скрипт рассчитан на однократный запуск: существующие базу и роль не перезаписывает.
@@ -29,7 +29,8 @@ Python-инструменты `add_perovskite_structure`, `delete_perovskite_str
 Параметры LLM берутся из обычной секции `[llm_chat]` конфигурационного файла.
 
 ```sh
-psql -h postgres.g -U postgres -d postgres -X -f searcher/sql/init.sql
+psql -h postgres.g -U postgres -d postgres -X \
+  -f searcher/scripts/perovskite_database_managment_postgres/init.sql
 
 cd searcher
 uv run python main.py -c conf/example.ini paper_to_perovskite paper.pdf

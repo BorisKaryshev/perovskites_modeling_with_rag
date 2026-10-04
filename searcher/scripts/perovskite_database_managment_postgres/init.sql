@@ -1,5 +1,5 @@
 -- PostgreSQL 15+. Run once with psql as a PostgreSQL administrator:
--- psql -h postgres.g -U postgres -d postgres -X -f sql/init.sql
+-- psql -h postgres.g -U postgres -d postgres -X -f scripts/perovskite_database_managment_postgres/init.sql
 -- Run from searcher/, or pass the full path to this file.
 -- Do not use --single-transaction: CREATE DATABASE must run outside a transaction.
 -- Existing roles/databases are not overwritten; errors stop the script.
@@ -16,7 +16,7 @@ CREATE DATABASE perovskites OWNER perovskites;
 
 -- Create tables and identity sequences under the application's ownership.
 SET ROLE perovskites;
-\ir schema-v2.1.sql
+\ir ../../sql/schema-v2.1.sql
 RESET ROLE;
 
 \echo 'Initialized database perovskites with login perovskites and model v2.1.'

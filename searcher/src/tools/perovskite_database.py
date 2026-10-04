@@ -11,13 +11,37 @@ from .decorator import tool
 
 
 MODEL_VERSION = "2.1"
-_PROJECT_ROOT = Path(__file__).resolve().parents[3]
-_MODEL_ROOT = _PROJECT_ROOT / "perovskite_structure" / "perovskite-model"
-if not _MODEL_ROOT.is_dir():
-    raise RuntimeError(
-        "Perovskite model not found at "
-        f"{_MODEL_ROOT}. Ensure ./perovskite_structure points to the model repository."
+_SOURCE_FILE = Path(__file__).resolve()
+
+
+def _find_model_root() -> Path:
+    """Locate perovskite-model in both repository and container layouts."""
+    candidates = []
+    configured = os.environ.get("PEROVSKITE_MODEL_PATH")
+    if configured:
+        configured_path = Path(configured).expanduser()
+        candidates.extend((configured_path, configured_path / "perovskite-model"))
+
+    candidates.extend(
+        (
+            Path.cwd() / "perovskite_structure" / "perovskite-model",
+            _SOURCE_FILE.parents[2] / "perovskite_structure" / "perovskite-model",
+            _SOURCE_FILE.parents[3] / "perovskite_structure" / "perovskite-model",
+            _SOURCE_FILE.parents[2] / "perovskite-model",
+        )
     )
+    for candidate in candidates:
+        if (candidate / "perovskite_models" / "__init__.py").is_file():
+            return candidate.resolve()
+
+    searched = ", ".join(str(path) for path in candidates)
+    raise RuntimeError(
+        "Perovskite model v2.1 was not found. Searched: "
+        f"{searched}. Set PEROVSKITE_MODEL_PATH if it is stored elsewhere."
+    )
+
+
+_MODEL_ROOT = _find_model_root()
 if str(_MODEL_ROOT) not in sys.path:
     sys.path.insert(0, str(_MODEL_ROOT))
 

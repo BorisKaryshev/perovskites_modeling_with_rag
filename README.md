@@ -15,8 +15,9 @@
 Python-инструменты `add_perovskite_structure`, `delete_perovskite_structure` и
 `search_perovskite_structures` находятся в
 `searcher/src/tools/perovskite_database.py`. Они используют актуальную модель
-2.1 из `./perovskite_structure/perovskite-model` и PostgreSQL-схему
-`sql/schema-v2.1.sql`.
+2.1, скопированную в `searcher/src/perovskite_models`, и PostgreSQL-схему
+`searcher/sql/schema-v2.1.sql`. Каталог `searcher` содержит весь необходимый код;
+внешний каталог или симлинк `perovskite_structure` не требуется.
 
 Перед запуском примените схему к пустой базе. По умолчанию пример использует
 `postgresql://localhost/perovskites`; заданный `DATABASE_URL` имеет приоритет.
@@ -25,7 +26,7 @@ Python-инструменты `add_perovskite_structure`, `delete_perovskite_str
 ```sh
 psql "${DATABASE_URL:-postgresql://localhost/perovskites}" \
   -X -v ON_ERROR_STOP=1 \
-  -f perovskite_structure/perovskite-model/sql/schema-v2.1.sql
+  -f searcher/sql/schema-v2.1.sql
 
 cd searcher
 uv run python main.py -c conf/example.ini paper_to_perovskite paper.pdf

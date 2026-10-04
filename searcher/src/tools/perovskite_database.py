@@ -4,52 +4,15 @@ from __future__ import annotations
 
 import json
 import os
-import sys
-from pathlib import Path
+
+import psycopg
+from src.perovskite_models import PerovskiteData
+from src.perovskite_models.dba import DBA
 
 from .decorator import tool
 
 
 MODEL_VERSION = "2.1"
-_SOURCE_FILE = Path(__file__).resolve()
-
-
-def _find_model_root() -> Path:
-    """Locate perovskite-model in both repository and container layouts."""
-    candidates = []
-    configured = os.environ.get("PEROVSKITE_MODEL_PATH")
-    if configured:
-        configured_path = Path(configured).expanduser()
-        candidates.extend((configured_path, configured_path / "perovskite-model"))
-
-    candidates.extend(
-        (
-            Path.cwd() / "perovskite_structure" / "perovskite-model",
-            _SOURCE_FILE.parents[2] / "perovskite_structure" / "perovskite-model",
-            _SOURCE_FILE.parents[3] / "perovskite_structure" / "perovskite-model",
-            _SOURCE_FILE.parents[2] / "perovskite-model",
-        )
-    )
-    for candidate in candidates:
-        if (candidate / "perovskite_models" / "__init__.py").is_file():
-            return candidate.resolve()
-
-    searched = ", ".join(str(path) for path in candidates)
-    raise RuntimeError(
-        "Perovskite model v2.1 was not found. Searched: "
-        f"{searched}. Set PEROVSKITE_MODEL_PATH if it is stored elsewhere."
-    )
-
-
-_MODEL_ROOT = _find_model_root()
-if str(_MODEL_ROOT) not in sys.path:
-    sys.path.insert(0, str(_MODEL_ROOT))
-
-import psycopg  # noqa: E402
-from perovskite_models import PerovskiteData  # noqa: E402
-from perovskite_models.dba import DBA  # noqa: E402
-
-
 PEROVSKITE_SEARCH_FIELDS = tuple(DBA._perovskite_search)
 LAYER_STACK_SEARCH_FIELDS = tuple(DBA._stack_search)
 _database_dsn: str | None = None

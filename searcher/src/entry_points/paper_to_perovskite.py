@@ -20,17 +20,18 @@ logger = logging.getLogger(__name__)
 
 
 class PaperToPerovskiteEntryPoint(EntryPoint):
-    """Example agent: extract model v2.1 records from a PDF and store them."""
+    """Extract model v2.1 records from one or more PDFs, one paper at a time."""
 
     def __init__(self, args: Namespace):
         super().__init__(args)
-        self._pdf = args.pdf.expanduser().resolve()
+        self._pdfs = [pdf.expanduser().resolve() for pdf in args.pdf]
         self._max_characters = args.max_characters
 
-        if not self._pdf.is_file():
-            raise FileNotFoundError(f"PDF not found: {self._pdf}")
-        if self._pdf.suffix.casefold() != ".pdf":
-            raise ValueError(f"Expected a .pdf file, got: {self._pdf}")
+        for pdf in self._pdfs:
+            if not pdf.is_file():
+                raise FileNotFoundError(f"PDF not found: {pdf}")
+            if pdf.suffix.casefold() != ".pdf":
+                raise ValueError(f"Expected a .pdf file, got: {pdf}")
 
         database_config = self._config.get("perovskite_database", {})
         dsn = os.environ.get("DATABASE_URL") or database_config.get("dsn")
@@ -39,17 +40,27 @@ class PaperToPerovskiteEntryPoint(EntryPoint):
 
     @classmethod
     def add_subparser(cls, parser: ArgumentParser) -> None:
-        parser.add_argument("pdf", type=Path, help="Scientific paper in PDF format")
+        parser.add_argument("pdf", type=Path, nargs="+", help="One or more scientific papers in PDF format")
         parser.add_argument(
             "--max-characters",
             type=int,
             default=120_000,
-            help="Maximum extracted characters sent to the model (default: 120000)",
+            help="Maximum extracted characters per paper sent to the model (default: 120000)",
         )
 
     async def run(self) -> None:
+        for index, pdf in enumerate(self._pdfs, start=1):
+            logger.info("Processing paper %d/%d: %s", index, len(self._pdfs), pdf)
+            print(f"Paper {index}/{len(self._pdfs)}: {pdf}", flush=True)
+            try:
+                await self._process_paper(pdf)
+            except Exception:
+                logger.exception("Paper processing failed: %s; stopping batch", pdf)
+                raise
+
+    async def _process_paper(self, pdf: Path) -> None:
         parser = DocumentParser.create("auto")
-        paper_text = await parser.parse_document(self._pdf)
+        paper_text = await parser.parse_document(pdf)
         if not paper_text.strip():
             raise ValueError(
                 "No text could be extracted from the PDF; OCR may be required"
@@ -92,7 +103,7 @@ class PaperToPerovskiteEntryPoint(EntryPoint):
             {
                 "role": "user",
                 "content": (
-                    f"Extract and store the perovskite data reported in {self._pdf.name}. "
+                    f"Extract and store the perovskite data reported in {pdf.name}. "
                     "After the tool succeeds, summarize the inserted dataset ID and any "
                     "important limitations in the extraction.\n\nPAPER TEXT:\n"
                     + paper_text

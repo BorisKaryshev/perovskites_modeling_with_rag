@@ -36,9 +36,14 @@ psql -h postgres.g -U postgres -d postgres -X \
 
 cd searcher
 uv run python main.py -c conf/example.ini paper_to_perovskite paper.pdf
+uv run python main.py -c conf/example.ini paper_to_perovskite paper1.pdf paper2.pdf
 uv run python main.py -c conf/example.ini best_perovskite \
   "best lead-free material with the lowest reported band gap"
 ```
+
+Несколько PDF обрабатываются последовательно, каждый в отдельном контексте агента.
+Лимит `--max-characters` применяется к каждой статье. При исключении обработка
+останавливается; ранее добавленные datasets остаются в базе.
 
 Первый агент извлекает подтверждённые статьёй сведения, проверяет их через
 Pydantic-модель 2.1 и добавляет один dataset. Второй преобразует запрос

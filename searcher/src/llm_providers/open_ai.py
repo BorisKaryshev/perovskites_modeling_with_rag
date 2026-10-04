@@ -22,10 +22,18 @@ RETRY_DECO_FACTORY = lambda: backoff.on_exception(
     (
         ConnectionError,
         TimeoutError,
+        aiohttp.ClientError,
     ),
     max_tries=5,
     jitter=backoff.random_jitter,
     logger=backoff_logger,
+    on_backoff=lambda details: logger.warning(
+        "Retrying LLM request after %s (attempt %d/%d, wait %.1fs)",
+        type(details["exception"]).__name__,
+        details["tries"],
+        5,
+        details["wait"],
+    ),
 )
 
 

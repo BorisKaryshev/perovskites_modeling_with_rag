@@ -65,7 +65,7 @@ class PerovskiteDatabaseToolTests(unittest.TestCase):
         with patch("src.tools.perovskite_database._dsn", return_value="test"), patch(
             "src.tools.perovskite_database.DBA", FakeDBA
         ):
-            result = json.loads(add_perovskite_structure(json.dumps(document)))
+            result = json.loads(add_perovskite_structure(document))
         self.assertTrue(result["ok"])
         self.assertEqual(result["dataset_id"], 42)
         self.assertEqual(result["perovskites"], 1)
@@ -88,7 +88,13 @@ class PerovskiteDatabaseToolTests(unittest.TestCase):
             ]
         }
         with self.assertRaises(ValidationError):
-            add_perovskite_structure(json.dumps(document))
+            add_perovskite_structure(document)
+
+    def test_add_tool_accepts_native_document_object(self):
+        parameters = add_perovskite_structure._tool_schema["function"]["parameters"]
+        self.assertEqual(parameters["required"], ["document"])
+        self.assertEqual(parameters["properties"]["document"]["type"], "object")
+        self.assertNotIn("document_json", parameters["properties"])
 
     def test_filter_parser_accepts_fields_and_rejects_unknown_ones(self):
         self.assertEqual(

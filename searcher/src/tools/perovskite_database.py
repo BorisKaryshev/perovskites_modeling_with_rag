@@ -80,21 +80,17 @@ def _parse_filters(filters_json: str, allowed: tuple[str, ...]) -> dict[str, str
 
 
 @tool
-def add_perovskite_structure(document_json: str) -> str:
+def add_perovskite_structure(document: dict) -> str:
     """Validate and add one perovskite model v2.1 dataset to PostgreSQL.
 
-    `document_json` must be a JSON object matching PerovskiteData with root arrays
+    `document` must be a JSON object matching PerovskiteData with root arrays
     `perovskites` and `layer_stacks`. Unknown facts must be omitted or null, never
     guessed. Material properties belong to a perovskite; photovoltaic metrics such
     as pce, voc, jsc, fill_factor and eqe belong to a layer stack. The return value
     includes the generated dataset_id needed to retrieve or delete the dataset.
     """
     logger.info("Validating perovskite dataset for insertion")
-    try:
-        raw = json.loads(document_json)
-    except json.JSONDecodeError as ex:
-        raise ValueError(f"document_json is not valid JSON: {ex.msg}") from ex
-    data = PerovskiteData.model_validate(raw)
+    data = PerovskiteData.model_validate(document)
     if not data.perovskites and not data.layer_stacks:
         raise ValueError("Refusing to add an empty PerovskiteData dataset")
     dataset_id = DBA(_dsn()).save(data)
@@ -107,6 +103,16 @@ def add_perovskite_structure(document_json: str) -> str:
         perovskites=len(data.perovskites),
         layer_stacks=len(data.layer_stacks),
     )
+
+
+# Expose the complete model to the LLM. In particular, `document` is a native
+# object rather than JSON serialized into a second string layer.
+add_perovskite_structure._tool_schema["function"]["parameters"] = {
+    "type": "object",
+    "properties": {"document": get_perovskite_model_schema()},
+    "required": ["document"],
+    "additionalProperties": False,
+}
 
 
 @tool

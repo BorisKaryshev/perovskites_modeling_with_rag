@@ -10,7 +10,6 @@ from src.tools.perovskite_database import (
 )
 
 from argparse import ArgumentParser, Namespace
-import json
 import logging
 import os
 from pathlib import Path
@@ -80,24 +79,25 @@ class PaperToPerovskiteEntryPoint(EntryPoint):
         agent = SimpleAgnet(chat_provider=chat_provider)
         agent.add_tool(add_perovskite_structure)
 
-        schema = json.dumps(
-            get_perovskite_model_schema(), ensure_ascii=False, separators=(",", ":")
-        )
         messages = [
             {
                 "role": "system",
                 "content": (
                     "You extract perovskite data from scientific papers into model "
                     "version 2.1 and save it with add_perovskite_structure. Use only "
-                    "facts supported by the supplied paper. Never invent missing "
+                    "facts supported by the supplied paper. Pass `document` as a "
+                    "native object to the tool; never serialize it into a JSON string. "
+                    "Never invent missing "
                     "composition, structure, conditions, values, units, layers, or "
-                    "citations; omit optional unknown fields. Keep repeated measurements "
-                    "as separate properties. Material properties belong in perovskites; "
+                    "citations; omit optional unknown fields. Property values must be "
+                    "numbers and property units must be non-empty. Put space_group in "
+                    "structure and textual observations in notes instead of properties. "
+                    "Keep repeated measurements as separate properties. Material "
+                    "properties belong in perovskites; "
                     "PCE, Voc, Jsc, fill factor, EQE, and device stability belong in the "
                     "relevant layer_stack. Empty lists mean only that no records were "
                     "extracted. Create stable, unique IDs within this document. Call the "
-                    "add tool exactly once after checking the JSON against this schema: "
-                    + schema
+                    "add tool exactly once after checking the object against its tool schema."
                 ),
             },
             {

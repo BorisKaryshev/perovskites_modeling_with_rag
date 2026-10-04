@@ -34,6 +34,10 @@ Python-инструменты `add_perovskite_structure`, `delete_perovskite_str
 psql -h postgres.g -U postgres -d postgres -X \
   -f searcher/scripts/perovskite_database_managment_postgres/init.sql
 
+# Remove all records while retaining tables and resetting generated IDs:
+psql -h postgres.g -U perovskites -d perovskites -X \
+  -f searcher/scripts/perovskite_database_managment_postgres/cleanup.sql
+
 cd searcher
 uv run python main.py -c conf/example.ini paper_to_perovskite paper.pdf
 uv run python main.py -c conf/example.ini paper_to_perovskite paper1.pdf paper2.pdf

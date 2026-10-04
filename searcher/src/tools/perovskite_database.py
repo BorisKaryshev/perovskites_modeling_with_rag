@@ -4,12 +4,28 @@ from __future__ import annotations
 
 import json
 import os
+import logging
 
 import psycopg
 from src.perovskite_models import PerovskiteData
 from src.perovskite_models.dba import DBA
 
 from .decorator import tool
+
+logger = logging.getLogger(__name__)
+
+
+def _log_database_target(dsn: str) -> None:
+    """Log connection context without passwords or the raw connection string."""
+    try:
+        options = psycopg.conninfo.conninfo_to_dict(dsn)
+    except psycopg.Error:
+        logger.warning("Invalid PostgreSQL connection string; target unavailable")
+        return
+    target = {key: options.get(key) or os.environ.get(env) or "libpq default"
+              for key, env in (("host", "PGHOST"), ("port", "PGPORT"),
+                               ("dbname", "PGDATABASE"), ("user", "PGUSER"))}
+    logger.info("PostgreSQL connection target: %s", target)
 
 
 MODEL_VERSION = "2.1"
@@ -38,6 +54,7 @@ def _dsn() -> str:
             "Perovskite database is not configured. Set [perovskite_database] "
             "dsn in the config or export DATABASE_URL."
         )
+    _log_database_target(value)
     return value
 
 
@@ -72,6 +89,7 @@ def add_perovskite_structure(document_json: str) -> str:
     as pce, voc, jsc, fill_factor and eqe belong to a layer stack. The return value
     includes the generated dataset_id needed to retrieve or delete the dataset.
     """
+    logger.info("Validating perovskite dataset for insertion")
     try:
         raw = json.loads(document_json)
     except json.JSONDecodeError as ex:
@@ -80,6 +98,8 @@ def add_perovskite_structure(document_json: str) -> str:
     if not data.perovskites and not data.layer_stacks:
         raise ValueError("Refusing to add an empty PerovskiteData dataset")
     dataset_id = DBA(_dsn()).save(data)
+    logger.info("Saved dataset_id=%s perovskites=%d layer_stacks=%d",
+                dataset_id, len(data.perovskites), len(data.layer_stacks))
     return _json_result(
         ok=True,
         model_version=MODEL_VERSION,
@@ -99,7 +119,9 @@ def delete_perovskite_structure(dataset_id: int, confirmation: str) -> str:
     changed.
     """
     expected = f"DELETE DATASET {dataset_id}"
+    logger.info("Deleting dataset_id=%s", dataset_id)
     if confirmation != expected:
+        logger.warning("Deletion refused: confirmation mismatch dataset_id=%s", dataset_id)
         return _json_result(
             ok=False,
             deleted=False,
@@ -109,6 +131,7 @@ def delete_perovskite_structure(dataset_id: int, confirmation: str) -> str:
     db = DBA(_dsn())
     existing = db.get(dataset_id)
     if existing is None:
+        logger.warning("Deletion skipped: dataset_id=%s not found", dataset_id)
         return _json_result(
             ok=False,
             deleted=False,
@@ -116,6 +139,7 @@ def delete_perovskite_structure(dataset_id: int, confirmation: str) -> str:
             error="Dataset not found",
         )
     deleted = db.delete(dataset_id)
+    logger.info("Deletion result dataset_id=%s deleted=%s", dataset_id, deleted)
     return _json_result(
         ok=deleted,
         deleted=deleted,
@@ -146,6 +170,7 @@ def search_perovskite_structures(
     layers.thickness_nm, and all properties.<property field> fields above.
     Each result includes dataset_id so it can be traced or deleted.
     """
+    logger.info("Searching entity=%s filters=%s limit=%s", entity, filters_json, limit)
     if entity not in {"perovskite", "layer_stack"}:
         raise ValueError("entity must be 'perovskite' or 'layer_stack'")
     if not 1 <= limit <= 100:
@@ -171,6 +196,7 @@ def search_perovskite_structures(
 
     results = []
     with psycopg.connect(db.dsn) as connection:
+        logger.info("PostgreSQL connected; executing %s search", entity)
         matching_ids = db._search_ids(
             connection, root, id_column, mapping, patterns
         )
@@ -196,6 +222,8 @@ def search_perovskite_structures(
                 }
             )
 
+    logger.info("Search complete entity=%s matched=%d returned=%d truncated=%s",
+                entity, len(matching_ids), len(results), len(matching_ids) > limit)
     return _json_result(
         ok=True,
         model_version=MODEL_VERSION,

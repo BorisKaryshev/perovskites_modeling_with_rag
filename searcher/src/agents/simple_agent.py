@@ -5,6 +5,7 @@ from src.llm_providers.interface import ChatProvider
 import json
 import logging
 import uuid
+from time import perf_counter
 
 logger = logging.getLogger(__name__)
 
@@ -51,13 +52,23 @@ class SimpleAgnet(AgentBase):
                 )
 
                 for i in response.tool_calls:
+                    started = perf_counter()
+                    logger.info("Starting tool %s call_id=%s", i.name, i.call_id)
                     try:
                         res = i.func(**i.arguments)
                     except Exception as ex:
+                        logger.exception(
+                            "Tool %s failed call_id=%s elapsed=%.3fs",
+                            i.name, i.call_id, perf_counter() - started,
+                        )
                         res = json.dumps(
                             {"ok": False, "error": str(ex)}, ensure_ascii=False
                         )
-                    logger.info("Called tool %s", i.name)
+                    else:
+                        logger.info(
+                            "Tool %s returned call_id=%s elapsed=%.3fs",
+                            i.name, i.call_id, perf_counter() - started,
+                        )
                     context.append(
                         {
                             "role": "tool",

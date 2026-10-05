@@ -6,6 +6,7 @@ from src.tools.perovskite_database import (
     LAYER_STACK_SEARCH_FIELDS,
     PEROVSKITE_SEARCH_FIELDS,
     configure_perovskite_database,
+    list_registered_property_names,
     search_perovskite_structures,
 )
 
@@ -35,6 +36,7 @@ class BestPerovskiteEntryPoint(EntryPoint):
             **self._config["llm_chat"]["options"],
         )
         agent = SimpleAgnet(chat_provider=chat_provider)
+        agent.add_tool(list_registered_property_names)
         agent.add_tool(search_perovskite_structures)
 
         messages = [
@@ -45,7 +47,12 @@ class BestPerovskiteEntryPoint(EntryPoint):
                     "the user's criteria. You must search before answering. Search values "
                     "are case-insensitive PostgreSQL regular expressions and fields in a "
                     "single call are AND-combined. Regex search does not perform numeric "
-                    "range comparisons: search broadly by property name/unit, inspect "
+                    "range comparisons. If a query mentions a property, call "
+                    "list_registered_property_names first and use the exact stored name "
+                    "in properties.name filters. Match common wording to stored names "
+                    "(for example, 'bandgap' or 'band gap' usually maps to `band_gap`); "
+                    "do not conclude the property is missing until you have checked names. "
+                    "Then search broadly by property name/unit, inspect "
                     "returned numeric values, and compare them yourself. Device metrics "
                     "are on layer_stack records; search those first when the query concerns "
                     "PCE, Voc, Jsc, fill factor, EQE, architecture, layers, or device "

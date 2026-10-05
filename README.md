@@ -12,8 +12,8 @@
 
 ## Агенты для базы перовскитов
 
-Python-инструменты `add_perovskite_structure`, `delete_perovskite_structure` и
-`search_perovskite_structures` находятся в
+Python-инструменты `add_perovskite_structure`, `delete_perovskite_structure`,
+`search_perovskite_structures` и `list_registered_property_names` находятся в
 `searcher/src/tools/perovskite_database.py`. Они используют актуальную модель
 2.1, скопированную в `searcher/src/perovskite_models`, и PostgreSQL-схему
 `searcher/sql/schema-v2.1.sql`. Каталог `searcher` содержит весь необходимый код;

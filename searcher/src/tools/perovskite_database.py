@@ -81,6 +81,40 @@ def _parse_filters(filters_json: str, allowed: tuple[str, ...]) -> dict[str, str
 
 
 @tool
+def list_registered_property_names() -> str:
+    """List property names currently stored in the perovskite database.
+
+    Returns each exact registered name, its usage count, and whether it occurs
+    on a material or a layer stack. Use these exact names to build property-name
+    search filters; for example, band gap may be stored as `band_gap`.
+    """
+    dsn = _dsn()
+    query = """
+        SELECT name,
+               count(*) AS occurrences,
+               bool_or(perovskite_id IS NOT NULL) AS on_perovskite,
+               bool_or(layer_stack_id IS NOT NULL) AS on_layer_stack
+        FROM perovskite.property
+        GROUP BY name
+        ORDER BY lower(name), name
+    """
+    logger.info("Listing registered property names")
+    with psycopg.connect(dsn) as connection:
+        rows = connection.execute(query).fetchall()
+    properties = [
+        {
+            "name": name,
+            "occurrences": occurrences,
+            "on_perovskite": on_perovskite,
+            "on_layer_stack": on_layer_stack,
+        }
+        for name, occurrences, on_perovskite, on_layer_stack in rows
+    ]
+    logger.info("Found %d registered property names", len(properties))
+    return _json_result(count=len(properties), properties=properties)
+
+
+@tool
 def add_perovskite_structure(document: dict) -> str:
     """Validate and add one perovskite model v2.1 dataset to PostgreSQL.
 
@@ -264,5 +298,6 @@ __all__ = [
     "configure_perovskite_database",
     "delete_perovskite_structure",
     "get_perovskite_model_schema",
+    "list_registered_property_names",
     "search_perovskite_structures",
 ]

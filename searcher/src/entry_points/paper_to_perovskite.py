@@ -1,6 +1,6 @@
 from .interface import EntryPoint
 
-from src.agents.simple_agent import SimpleAgnet
+from src.agents.simple_agent import FormattingFailuresExhausted, SimpleAgnet
 from src.document_parser import DocumentParser
 from src.llm_providers import ChatProvider
 from src.tools.perovskite_database import (
@@ -54,6 +54,10 @@ class PaperToPerovskiteEntryPoint(EntryPoint):
             print(f"Paper {index}/{len(self._pdfs)}: {pdf}", flush=True)
             try:
                 await self._process_paper(pdf)
+            except FormattingFailuresExhausted as ex:
+                logger.error(
+                    "Skipping paper after 13 formatting failures: %s (%s)", pdf, ex
+                )
             except Exception:
                 logger.exception("Paper processing failed: %s; stopping batch", pdf)
                 raise
@@ -152,4 +156,4 @@ class PaperToPerovskiteEntryPoint(EntryPoint):
                 ),
             },
         ]
-        print(await agent.run(messages))
+        print(await agent.run(messages, recover_formatting=True))

@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import os
 import logging
+from copy import deepcopy
 
 import psycopg
 from pydantic import ValidationError
@@ -164,6 +165,28 @@ add_perovskite_structure._tool_schema["function"]["parameters"] = {
 # must live at this parameters object's root rather than inside `document`.
 
 
+def make_pdf_add_perovskite_tool(source_path: str):
+    """Bind PDF provenance in code so the model cannot omit or alter it."""
+    absolute_source = os.path.abspath(source_path)
+
+    @tool
+    def add_pdf_perovskite_structure(document: dict) -> str:
+        """Add perovskite data extracted from the current PDF."""
+        prepared_document = deepcopy(document)
+        for perovskite in prepared_document.get("perovskites", []):
+            perovskite["source"] = absolute_source
+        logger.info("Setting perovskite source to input PDF path %s", absolute_source)
+        return add_perovskite_structure(prepared_document)
+
+    add_pdf_perovskite_structure._tool_schema = deepcopy(
+        add_perovskite_structure._tool_schema
+    )
+    add_pdf_perovskite_structure._tool_schema["function"]["name"] = (
+        "add_perovskite_structure"
+    )
+    return add_pdf_perovskite_structure
+
+
 @tool
 def delete_perovskite_structure(dataset_id: int, confirmation: str) -> str:
     """Delete one complete perovskite dataset by its database dataset_id.
@@ -299,5 +322,6 @@ __all__ = [
     "delete_perovskite_structure",
     "get_perovskite_model_schema",
     "list_registered_property_names",
+    "make_pdf_add_perovskite_tool",
     "search_perovskite_structures",
 ]

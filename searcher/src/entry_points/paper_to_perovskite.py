@@ -4,10 +4,9 @@ from src.agents.simple_agent import FormattingFailuresExhausted, SimpleAgnet
 from src.document_parser import DocumentParser
 from src.llm_providers import ChatProvider
 from src.tools.perovskite_database import (
-    add_perovskite_structure,
     configure_perovskite_database,
-    get_perovskite_model_schema,
     list_registered_property_names,
+    make_pdf_add_perovskite_tool,
 )
 
 from argparse import ArgumentParser, Namespace
@@ -83,7 +82,7 @@ class PaperToPerovskiteEntryPoint(EntryPoint):
         )
         agent = SimpleAgnet(chat_provider=chat_provider)
         agent.add_tool(list_registered_property_names)
-        agent.add_tool(add_perovskite_structure)
+        agent.add_tool(make_pdf_add_perovskite_tool(str(pdf)))
 
         messages = [
             {
@@ -93,10 +92,8 @@ class PaperToPerovskiteEntryPoint(EntryPoint):
                     "version 2.1 and save it with add_perovskite_structure. Use only "
                     "facts supported by the supplied paper. Pass `document` as a "
                     "native object to the tool; never serialize it into a JSON string. "
-                    f"For every perovskite, set its top-level `source` field to exactly "
-                    f"this input PDF filename: {pdf.name}. Do not put the DOI, article "
-                    "citation, or a different filename in this field. Preserve citation "
-                    "details for individual measurements in `properties[].source`. "
+                    "The tool sets every perovskite's top-level `source` field to the "
+                    "absolute path of this input PDF; omit `source` from the document. "
                     "For every identified perovskite, actively extract its reported "
                     "quantitative material properties. Inspect tables, captions, text, "
                     "and supplementary information included in the paper text. Look for "
@@ -115,8 +112,11 @@ class PaperToPerovskiteEntryPoint(EntryPoint):
                     "materials and measurements in this document. Give each property a "
                     "numeric value and non-empty unit exactly as reported "
                     "or a standard unit explicitly converted from the paper. Include "
-                    "method, conditions (including temperature/phase when reported), and "
-                    "property-level source/table citation whenever available. For each "
+                    "method and conditions (including temperature/phase when reported). "
+                    "For `properties[].source`, cite the location that supports each "
+                    "value when useful, such as `Table 2`, `Figure 3`, page, or section; "
+                    "combine it with the PDF filename when needed to identify the source. "
+                    "Do not guess a location. For each "
                     "perovskite, include a given property only once for the same value, "
                     "unit, and conditions, even when it is repeated in multiple tables, "
                     "captions, or passages; merge those citations into that one record. "

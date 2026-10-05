@@ -7,6 +7,7 @@ from src.tools.perovskite_database import (
     add_perovskite_structure,
     configure_perovskite_database,
     get_perovskite_model_schema,
+    list_registered_property_names,
 )
 
 from argparse import ArgumentParser, Namespace
@@ -77,6 +78,7 @@ class PaperToPerovskiteEntryPoint(EntryPoint):
             **self._config["llm_chat"]["options"],
         )
         agent = SimpleAgnet(chat_provider=chat_provider)
+        agent.add_tool(list_registered_property_names)
         agent.add_tool(add_perovskite_structure)
 
         messages = [
@@ -95,8 +97,15 @@ class PaperToPerovskiteEntryPoint(EntryPoint):
                     "conductivity, mobility, lifetime, stability, and any other measured "
                     "or calculated numeric material property. Do not leave `properties` "
                     "empty when the paper reports a numeric property for that material. "
-                    "Give each property a concise stable snake_case name (use `band_gap` "
-                    "for band gap), numeric value, and non-empty unit exactly as reported "
+                    "Before naming properties, call list_registered_property_names and "
+                    "reuse an existing registered name whenever it describes the same "
+                    "property; do not create a spelling or naming variant. Match names "
+                    "by meaning, not only exact wording (for example, use existing "
+                    "`band_gap` for 'band gap' or 'bandgap'). Create a new concise stable "
+                    "snake_case name only when the property is genuinely distinct from "
+                    "every registered name. Use that same name consistently for all "
+                    "materials and measurements in this document. Give each property a "
+                    "numeric value and non-empty unit exactly as reported "
                     "or a standard unit explicitly converted from the paper. Include "
                     "method, conditions (including temperature/phase when reported), and "
                     "property-level source/table citation whenever available. Keep multiple "

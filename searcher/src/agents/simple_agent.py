@@ -24,7 +24,13 @@ class SimpleAgnet(AgentBase):
     def add_tool(self, func):
         self._chat_model.add_tool_call(func)
 
-    async def run(self, prompt, *, recover_formatting: bool = False):
+    async def run(
+        self,
+        prompt,
+        *,
+        recover_formatting: bool = False,
+        required_tools: tuple[str, ...] = (),
+    ):
         context = []
         if isinstance(prompt, list):
             context += prompt
@@ -32,6 +38,7 @@ class SimpleAgnet(AgentBase):
             context = [prompt]
         original_context = deepcopy(context)
         formatting_failures = 0
+        successful_tools = set()
 
         def record_formatting_failure(message: str) -> None:
             nonlocal context, formatting_failures
@@ -122,6 +129,13 @@ class SimpleAgnet(AgentBase):
                             "Tool %s returned call_id=%s elapsed=%.3fs",
                             i.name, i.call_id, perf_counter() - started,
                         )
+                        if i.name in required_tools and isinstance(res, str):
+                            try:
+                                tool_result = json.loads(res)
+                            except json.JSONDecodeError:
+                                tool_result = None
+                            if isinstance(tool_result, dict) and tool_result.get("ok"):
+                                successful_tools.add(i.name)
                     context.append(
                         {
                             "role": "tool",
@@ -134,6 +148,13 @@ class SimpleAgnet(AgentBase):
                     record_formatting_failure(message)
 
             else:
+                missing_tools = set(required_tools) - successful_tools
+                if recover_formatting and missing_tools:
+                    record_formatting_failure(
+                        "The response ended without successful required tool call(s): "
+                        + ", ".join(sorted(missing_tools))
+                    )
+                    continue
                 return response.response
 
         raise RuntimeError("Agent exceeded the limit of 12 tool-call rounds")

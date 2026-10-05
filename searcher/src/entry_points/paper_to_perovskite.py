@@ -156,4 +156,8 @@ class PaperToPerovskiteEntryPoint(EntryPoint):
                 ),
             },
         ]
-        print(await agent.run(messages, recover_formatting=True))
+        print(await agent.run(
+            messages,
+            recover_formatting=True,
+            required_tools=("add_perovskite_structure",),
+        ))
